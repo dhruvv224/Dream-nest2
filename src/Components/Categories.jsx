@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { categories } from '../Data'
+import { Link } from 'react-router-dom'
 const Categories = () => {
   return (
     <div className='Categories py-[50px] px-[60px]  bg-gray-100'>
@@ -11,7 +12,24 @@ const Categories = () => {
         home, and create unforgettable memories in your dream destination.
         </p>
         </div>
-       
+       <div className='categories_list flex flex-wrap py-[50px] justify-center gap-5'>
+{
+    categories.slice(1,7).map((category,index)=>(
+        <Link to={`/properties/categories/${category.label}`}>
+            <div className='category relative flex items-center justify-center w-[250px] h-[200px] cursor-pointer' key={index}>
+                <img src={category.img} alt={category.label} className='h-full w-full object-cover absolute'/>
+                <div className='overlay absolute w-full h-full bg-[rgba(0, 0, 0, 0.55)] duration-200'></div>
+                <div className='category_text relative'>
+                    <div className='category_icon text-[45px]'>{category.icon}</div>
+                    <p className='font-semibold'>{category.label}</p>
+                </div>
+
+            </div>
+        </Link>
+    ))
+}
+
+       </div>
       
     </div>
   )
