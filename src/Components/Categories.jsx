@@ -17,11 +17,11 @@ const Categories = () => {
     categories.slice(1,7).map((category,index)=>(
         <Link to={`/properties/categories/${category.label}`}>
             <div className='category relative flex items-center justify-center w-[250px] h-[200px] cursor-pointer' key={index}>
-                <img src={category.img} alt={category.label} className='h-full w-full object-cover absolute'/>
-                <div className='overlay absolute w-full h-full bg-[rgba(0, 0, 0, 0.55)] duration-200'></div>
-                <div className='category_text relative'>
-                    <div className='category_icon text-[45px]'>{category.icon}</div>
-                    <p className='font-semibold'>{category.label}</p>
+                <img src={category.img} alt={category.label} className='h-full w-full  absolute'/>
+                <div className='overlay absolute inset-0 bg-black bg-opacity-30 transition-all duration-300 hover:scale-75'></div>
+                <div className='category_text relative flex flex-col items-center justify-center text-center'>
+                    <div className='category_icon text-center text-[45px] text-white items-center justify-center'>{category.icon}</div>
+                    <p className='font-semibold text-white'>{category.label}</p>
                 </div>
 
             </div>
