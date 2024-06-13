@@ -15,7 +15,7 @@ const Navbar = () => {
         }
   return (
     <div>
-        <div className='navbar flex py-[10px] px-[60px] justify-between items-center relative shadow-xl'>
+        <div className=' navbar flex py-[10px] px-[60px] justify-between items-center relative shadow-2xl'>
             <Link to='/'>
             <img src='/assets/logo.png' alt='Trip-go' className='w-[100px] h-full cursor-pointer'/>
 
