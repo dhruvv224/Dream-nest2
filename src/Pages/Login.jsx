@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -16,8 +17,28 @@ const Login = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     }
-    const handleSubmit=()=>{
+    const handleSubmit=async(e)=>{
+      e.preventDefault();
+try {
+  const response=await axios.post('http://localhost:8000/api/auth/login',{email,password})
+  
+  const loggedIn=await response.data
+  // toast.success('login succesful',{
+  //   position:'top-center'
+  // })
+  localStorage.setItem('token', loggedIn.token);
+            toast.success('Login successful', {
+                position: 'top-center',
+            });
+            console.log('login successful', loggedIn);
+} catch (error) {
+  console.log("login failed",error.message)
+  toast.error('Login failed',error.message,{
+    position:'top-center'
 
+  })
+  
+}
     }
   return (
     <div className='mx-auto'>
@@ -29,7 +50,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" className="bg-black bg-opacity-50 text-white text-[18px] rounded-lg px-4 py-2 mb-4 block w-full" name='email'  onChange={(e)=>setEmail(e.target.value)} />
             <input type="email" placeholder="Passsword" className="bg-black bg-opacity-50 text-white text-[18px] rounded-lg px-4 py-2 mb-4 block w-full" name='email'  onChange={(e)=>setPassword(e.target.value)} />
-            <button className='bg-red-500 hover:bg-red-600 duration-200 text-white text-[18px] rounded-lg px-4 py-2 block w-full'></button>
+            <button className='bg-red-500 hover:bg-red-600 duration-200 text-white text-[18px] rounded-lg px-4 py-2 block w-full'>Login</button>
 
 
             </form>
