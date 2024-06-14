@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import { CiSearch } from "react-icons/ci";
 import { IoPerson } from "react-icons/io5";
 import { CiMenuFries } from "react-icons/ci";
-
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const[dropdownMenu,setDropdownMenu]=useState(false)
     const[search,setSearch]=useState('')
+    const user=useSelector((state)=>state.user);
+
     console.log(search)
     const alert2 =()=>
         {
@@ -30,7 +32,16 @@ const Navbar = () => {
                 </Link>
                 <button className='navbar_right_button md:h-[50px] flex items-center p-3 md:p-4 m-1 border border-gray-500 rounded-[30px] gap-2 bg-white cursor-pointer hover:shadow-lg' onClick={(e)=>setDropdownMenu(!dropdownMenu)}>
                     <CiMenuFries className='mr-2 '/>
-                    <IoPerson/>
+                    {
+                        !user ?(
+                            <IoPerson/>
+
+                        )
+                        :(
+                            <img src={`http://localhost:8000/${user.profileImagePat}`} alt="" className='rounded-[50%] object-cover' />
+                        )
+
+                    }
                 </button>
                 {
                     dropdownMenu &&(

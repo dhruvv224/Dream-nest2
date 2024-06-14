@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import {Link, useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../Store/Slice';
 const Login = () => {
   const navigate=useNavigate()
+  const dispatch=useDispatch();
     // const  notify=()=>{
     //     toast.success('Registration successful', {
     //         position: 'top-center',
@@ -24,6 +27,16 @@ try {
   const response=await axios.post('http://localhost:8000/api/auth/login',{email,password})
   
   const loggedIn=await response.data
+  console.log(loggedIn)
+  if(loggedIn)
+    {
+      dispatch(
+        setUser({
+          user:loggedIn.user,
+          token:loggedIn.token
+        })
+      )
+    }
   // toast.success('login succesful',{
   //   position:'top-center'
   // })
