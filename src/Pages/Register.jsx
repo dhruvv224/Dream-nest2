@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';  // Import axios
 import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
@@ -13,7 +14,7 @@ const Register = () => {
 
     const containerStyle = {
         display: 'flex',
-        justifyContent:"center",
+        justifyContent: "center",
         alignItems: 'center',
         height: '100vh',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -26,15 +27,31 @@ const Register = () => {
         backgroundPosition: 'center',
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulate registration process
-        // Here you can perform actual form submission logic
-        console.log(formData);
-        // Example: Assuming successful registration
-        toast.success('Registration successful', {
-            position: 'top-center',
-        });
+
+        // Create FormData object to handle file upload
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+
+        try {
+            const response = await axios.post('http://localhost:8000/api/auth/register', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log("Register successful", response.data);
+            toast.success('Registration successful', {
+                position: 'top-center',
+            });
+        } catch (error) {
+            console.error("Error during registration", error);
+            toast.error('Registration failed', {
+                position: 'top-center',
+            });
+        }
     };
 
     const handleChange = (e) => {
@@ -66,7 +83,6 @@ const Register = () => {
                                     accept="image/*"
                                     style={{ display: "none" }}
                                     onChange={handleChange}
-                                    required
                                 />
                                 <label htmlFor="image" className="flex items-center cursor-pointer" tabIndex="0" role="button">
                                     <img src="/assets/addImage.png" alt="add profile photo" className='w-[35px] mr-2' />
