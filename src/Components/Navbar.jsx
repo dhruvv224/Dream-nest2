@@ -20,7 +20,7 @@ const Navbar = () => {
             <img src='/assets/logo.png' alt='Trip-go' className='w-[100px] h-full cursor-pointer'/>
 
             </Link>
-            <div className='navbar_search border border-gray-400 rounded-[30px] h-[50px] flex items-center md:w-1/4 gap-10  p-4'>
+            <div className='navbar_search border border-gray-400 rounded-[30px] h-[50px] flex items-center md:w-1/4 gap-10  p-4 hover:shadow-xl duration-100'>
                 <input type='text' placeholder='Search...' value={search} onChange={(e)=>setSearch(e.target.value)} className='outline-none w-full border-none'/>
                 <CiSearch className='h-[70px] w-[30px] cursor-pointer' onClick={alert2} />
             </div>
