@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 const Login = () => {
   const navigate=useNavigate()
     // const  notify=()=>{
@@ -57,6 +57,7 @@ try {
 
 
             </form>
+            <p className='text-white text-2xl text-center font-bold'> Don't Have An Account ?<Link to='/register'>Sign In Here</Link></p>
 
             </div>
         </div>
