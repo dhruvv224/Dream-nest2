@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link className='ml-2'>
                 Become A Host
                 </Link>
-                <button className='navbar_right_button md:h-[50px] flex items-center p-3 md:p-4 m-1 border border-gray-500 rounded-[30px] gap-2 bg-white cursor-pointer' onClick={(e)=>setDropdownMenu(!dropdownMenu)}>
+                <button className='navbar_right_button md:h-[50px] flex items-center p-3 md:p-4 m-1 border border-gray-500 rounded-[30px] gap-2 bg-white cursor-pointer hover:shadow-lg' onClick={(e)=>setDropdownMenu(!dropdownMenu)}>
                     <CiMenuFries className='mr-2 '/>
                     <IoPerson/>
                 </button>
