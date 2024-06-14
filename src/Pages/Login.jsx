@@ -2,15 +2,20 @@ import React from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
-    const  notify=()=>{
-        toast.success('Registration successful', {
-            position: 'top-center',
-        });
+    // const  notify=()=>{
+    //     toast.success('Registration successful', {
+    //         position: 'top-center',
+    //     });
+    // }
+    const loginStyle={
+      backgroundImage: "url('/assets/login.jpg')",
+        height: '100vh',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
     }
   return (
-    <div>
-         <Toaster position="top-center" />
-         <button onClick={notify}>Click me</button>
+    <div className='login-container' style={loginStyle}>
+        
         
     </div>
   )
