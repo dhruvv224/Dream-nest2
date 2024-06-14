@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-
+import {useNavigate} from 'react-router-dom';
 const Login = () => {
+  const navigate=useNavigate()
     // const  notify=()=>{
     //     toast.success('Registration successful', {
     //         position: 'top-center',
@@ -30,7 +31,9 @@ try {
             toast.success('Login successful', {
                 position: 'top-center',
             });
+ 
             console.log('login successful', loggedIn);
+            navigate('/')
 } catch (error) {
   console.log("login failed",error.message)
   toast.error('Login failed',error.message,{
