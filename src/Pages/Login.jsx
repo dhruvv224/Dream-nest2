@@ -57,7 +57,7 @@ try {
 
 
             </form>
-            <p className='text-white text-2xl text-center font-bold'> Don't Have An Account ?<Link to='/register'>Sign In Here</Link></p>
+            <p className='text-white text-xl text-center font-semibold mx-1 my-1'> Don't Have An Account ?<Link to='/register'>Sign In Here</Link></p>
 
             </div>
         </div>
