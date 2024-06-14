@@ -63,7 +63,7 @@ const Navbar = () => {
                                 <IoPerson />
 
                             ):(
-                                <img src={`http://localhost:8000/${user.profileImagePath}`} alt="hello" className='rounded-[50%] object-cover w-[30px] px-2' />
+                                <img src={`http://localhost:8000/${user.profileImagePath}`} alt="hello" className='rounded-[50%] object-cover w-[30px]' />
                             )
 
                         }
