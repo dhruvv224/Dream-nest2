@@ -7,12 +7,10 @@ const Listing = () => {
 
     const categoryContainerStyle = {
         padding: '50px 60px',
-      
         display: 'flex',
         flexWrap: 'wrap',
-       
         justifyContent: 'center',
-        gap: '60px',
+        gap: '55px',
     };
 
     const categoryItemStyle = {
@@ -21,23 +19,26 @@ const Listing = () => {
         alignItems: 'center',
         cursor: 'pointer',
     };
+const handleCategory=(category)=>{
+    setSelectedCategory(category)
 
+}
     return (
-        <div className='max-w-[1200px]'>
-
-       
-        <div style={categoryContainerStyle}>
-            {categories.map((item, index) => (
-                <div className='category1' style={categoryItemStyle} key={index}>
-                    <div className='category_icons' style={{ color: 'black', fontSize: '30px' }}>
-                        {item.icon}
-                    </div>
-                    <p className='category_label' style={{ color: 'black', fontSize: '18px', fontWeight: 'bold' }}>
-                        {item.label}
-                    </p>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className='max-w-[1200px]' style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
+                <div style={categoryContainerStyle}>
+                    {categories.map((item, index) => (
+                        <div className={`category1 ${selectedCategory === item.label ? 'text-red-600' : 'text-black'} hover:text-red-600 duration-200 text-black text-[30px]`} style={categoryItemStyle} key={index} onClick={()=>handleCategory(item.label)}>
+                        <div className='category_icons ' >
+                                {item.icon}
+                            </div>
+                            <p className='category_label font-bold text-[20px]'>
+                                {item.label}
+                            </p>
+                        </div>
+                    ))}
                 </div>
-            ))}
-        </div>
+            </div>
         </div>
     );
 };
