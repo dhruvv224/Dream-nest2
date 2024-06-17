@@ -5,7 +5,9 @@ import Home from './Pages/Home';
 import { Route, Routes } from 'react-router-dom';
 import Register from './Pages/Register';
 import Login from './Pages/Login';
+import Footer from './Components/Footer';
 function App() {
+
   return (
     <div className="App">
       <Routes>
@@ -15,7 +17,7 @@ function App() {
 
 
       </Routes>
-     
+     <Footer/>
     </div>
   );
 }
