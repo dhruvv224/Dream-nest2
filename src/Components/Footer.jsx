@@ -5,6 +5,9 @@ import { CiMail } from "react-icons/ci";
 
 const Footer = () => {
   return (
+    <div className='bg-gray-200	'>
+
+    
     <div className='footer grid grid-cols-3 gap-[40px] pt-2 '>
         <div className='footer_left flex justify-center max-w-[400px] '>
             <Link to='/'><img src='/assets/logo.png' alt='logo' className='max-w-[150px] mb-6'/>
@@ -37,6 +40,7 @@ const Footer = () => {
             
         </div>
 
+    </div>
     </div>
   )
 }
