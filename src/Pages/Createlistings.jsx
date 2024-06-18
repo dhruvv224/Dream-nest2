@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import { categories,types,facilities } from '../Data'
+import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
+
 import Navbar from '../Components/Navbar'
 const Createlistings = () => {
+    // categories
     const [category,setCategory]=useState('')
     const [type,setType]=useState('')
     console.log(types)
+    // form locations 
     const[formLocation,setFormLocation]=useState({
         streetAddress:'',
         aptSuite:'',
         city:'',
         province:'',
-        country:'',
+        country:''
     })
+// handle locations logic
     const handleChangeLocation=(e)=>{
         const {name,value}=e.target;
         setFormLocation({
@@ -19,6 +24,14 @@ const Createlistings = () => {
             [name]:value,
         })
     }
+    // basic counts
+    const[guestCount,setGuestCount]=useState(1);
+    const[bedroomCount,setBedroomCount]=useState(1);
+    const[bedCount,setBedCount]=useState(1);
+    const[bathroomCount,setBathroomCount]=useState(1);
+    
+// AMENITIES
+const [amenities, setAmenities] = useState([]);
 
     const handlePost=()=>{
 
@@ -134,6 +147,49 @@ const Createlistings = () => {
                                 />
                             </div>
                         </div>
+                        <h3>Share some basics about your place</h3>
+                            <div className='basics flex flex-wrap gap-[40px]'>
+                                <div className='basic flex items-center gap-[30px] p-[15px] border-solid border-gray-200 rounded-[10px]'>
+                                <p className='font-bold'>Guests</p>
+                                <div className="basic_count flex items-center gap-2 text-[20px]">
+                                    <RemoveCircleOutline onClick={()=>guestCount>1 && setGuestCount(guestCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+                                        <p>{guestCount}</p>
+                                        <RemoveCircleOutline onClick={()=>guestCount>1 && setGuestCount(guestCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+
+                                    </div>
+
+                                </div>
+                                <div className='basic'>
+                                    <p>Bedrooms</p>
+                                    <div className="basic_count">
+                                    <RemoveCircleOutline onClick={()=>bedroomCount>1 && setBedroomCount(bedroomCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+                                        <p>{bedroomCount}</p>
+                                        <RemoveCircleOutline onClick={()=>bedroomCount>1 && setBedroomCount(bedroomCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+
+                                    </div>
+
+                                </div>
+                                <div className='basic'>
+                                    <p>Beds</p>
+                                    <div className="basic_count">
+                                    <RemoveCircleOutline onClick={()=>bedCount>1 && setBedCount(bedCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+                                        <p>{bedCount}</p>
+                                        <RemoveCircleOutline onClick={()=>bedCount>1 && setBedCount(bedCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className='basic'>
+                                    <p>Bathrooms</p>
+                                    <div className="basic_count">
+                                    <RemoveCircleOutline onClick={()=>bathroomCount>1 && setBathroomCount(bathroomCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+                                        <p>{bathroomCount}</p>
+                                        <RemoveCircleOutline onClick={()=>bedroomCount>1 && setBathroomCount(bathroomCount-1)} className='text-[25px] cursor-pointer hover:text-red-500 duration-150'/>
+
+                                    </div>
+
+                                </div>
                 </div>
 
             </form>
