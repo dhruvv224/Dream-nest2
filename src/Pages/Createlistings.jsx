@@ -19,6 +19,7 @@ const Createlistings = () => {
             [name]:value,
         })
     }
+
     const handlePost=()=>{
 
     }
@@ -68,16 +69,16 @@ const Createlistings = () => {
                     </div>
                     
             <h3>Where's your place located?</h3>
-            <div className="full">
+            <div className="full max-w-[700px]">
               <div className="location">
-                <p>Street Address</p>
-                <input type='text' placeholder='Street Address' name='streetAddress' value={formLocation.streetAddress} onChange={handleChangeLocation} required/>
+                <p className='font-bold mx-3'>Street Address</p>
+                <input type='text' placeholder='Street Address' name='streetAddress' className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none' value={formLocation.streetAddress} onChange={handleChangeLocation} required/>
                 </div>
                 </div>
-                <div className='half'>
+                <div className='half grid grid-cols-1 gap-[40px]'>
                     <div className='location'>
 
-<p>Apartment, Suite, etc. (if applicable)</p>
+<p className='font-bold mx-3'>  Apartment, Suite, etc. (if applicable)</p>
                 <input
                   type="text"
                   placeholder="Apt, Suite, etc. (if applicable)"
@@ -85,10 +86,11 @@ const Createlistings = () => {
                   value={formLocation.aptSuite}
                   onChange={handleChangeLocation}
                   required
+                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
                 />
                     </div>
                     <div className='location'>
-                        <p>City</p>
+                        <p className='font-bold mx-3'>City</p>
                         <input
                   type="text"
                   placeholder="City"
@@ -96,6 +98,7 @@ const Createlistings = () => {
                   value={formLocation.city}
                   onChange={handleChangeLocation}
                   required
+                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
                 />
                     </div>
 
@@ -110,6 +113,7 @@ const Createlistings = () => {
                   value={formLocation.province}
                   onChange={handleChangeLocation}
                   required
+                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
                 />
               </div>
               <div className="location">
@@ -121,6 +125,7 @@ const Createlistings = () => {
                   value={formLocation.country}
                   onChange={handleChangeLocation}
                   required
+                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
                 />
               </div>
             </div>
