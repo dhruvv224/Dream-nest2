@@ -73,21 +73,32 @@ const Navbar = () => {
                             {
                                 !user ?(
                                     <>
-                                    <Link to="/login" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100'>
+                                    <Link to="/login" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
                                 Log In
                             </Link>
-                            <Link to="/register" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100'>
+                            <Link to="/register" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
                                 Sign Up
                             </Link>
                                     </>
                                 ) :(
                                     <>
-                                    <Link to="/profile" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100'>
+                                    <Link to="/profile" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
                                 Profile
                             </Link>
-                            <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100'>
+                            <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
+                                Trip List
+                            </Link>
+                            <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
+                                    Property List
+                            </Link>  <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
+                                Reservation List
+                            </Link>  <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
+                                Become A host
+                            </Link>
+                            <Link to="/logout" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
                                 Log Out
                             </Link>
+
                                     </>
                                 )
                             }
