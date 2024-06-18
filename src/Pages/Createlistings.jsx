@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { categories,types,facilities } from '../Data'
+import Navbar from '../Components/Navbar'
 const Createlistings = () => {
     const [category,setCategory]=useState('')
     const handlePost=()=>{
@@ -7,6 +8,7 @@ const Createlistings = () => {
     }
   return (
     <div>
+        <Navbar/>
         <div className='create-listing'>
             <h1>Publish Your Place</h1>
             <form onSubmit={handlePost}>
