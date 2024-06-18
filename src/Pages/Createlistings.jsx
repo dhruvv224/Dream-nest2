@@ -68,67 +68,72 @@ const Createlistings = () => {
                         }
                     </div>
                     
-            <h3>Where's your place located?</h3>
-            <div className="full max-w-[700px]">
-              <div className="location">
-                <p className='font-bold mx-3'>Street Address</p>
-                <input type='text' placeholder='Street Address' name='streetAddress' className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none' value={formLocation.streetAddress} onChange={handleChangeLocation} required/>
-                </div>
-                </div>
-                <div className='half grid grid-cols-1 gap-[40px]'>
-                    <div className='location'>
-
-<p className='font-bold mx-3'>  Apartment, Suite, etc. (if applicable)</p>
-                <input
-                  type="text"
-                  placeholder="Apt, Suite, etc. (if applicable)"
-                  name="aptSuite"
-                  value={formLocation.aptSuite}
-                  onChange={handleChangeLocation}
-                  required
-                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
-                />
-                    </div>
-                    <div className='location'>
-                        <p className='font-bold mx-3'>City</p>
-                        <input
-                  type="text"
-                  placeholder="City"
-                  name="city"
-                  value={formLocation.city}
-                  onChange={handleChangeLocation}
-                  required
-                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
-                />
-                    </div>
-
-                </div>
-                <div className="half">
-              <div className="location">
-                <p>Province</p>
-                <input
-                  type="text"
-                  placeholder="Province"
-                  name="province"
-                  value={formLocation.province}
-                  onChange={handleChangeLocation}
-                  required
-                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
-                />
-              </div>
-              <div className="location">
-                <p>Country</p>
-                <input
-                  type="text"
-                  placeholder="Country"
-                  name="country"
-                  value={formLocation.country}
-                  onChange={handleChangeLocation}
-                  required
-                  className='border-[1px] border-solid border-gray-200 rounder-[10px] text-[16px] w-full focus:outline-none'
-                />
-              </div>
-            </div>
+                    <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Where's your place located?</h3>
+                        <div className="full max-w-[700px] mb-6">
+                            <div className="location mb-4">
+                                <p className='font-bold mb-2'>Street Address</p>
+                                <input
+                                    type='text'
+                                    placeholder='Street Address'
+                                    name='streetAddress'
+                                    className='border-[1px] border-solid border-gray-300 rounded-[10px] text-[16px] w-full p-2 focus:outline-none focus:border-red-500'
+                                    value={formLocation.streetAddress}
+                                    onChange={handleChangeLocation}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className='half grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6'>
+                            <div className='location mb-4'>
+                                <p className='font-bold mb-2'>Apartment, Suite, etc. (if applicable)</p>
+                                <input
+                                    type="text"
+                                    placeholder="Apt, Suite, etc. (if applicable)"
+                                    name="aptSuite"
+                                    value={formLocation.aptSuite}
+                                    onChange={handleChangeLocation}
+                                    className='border-[1px] border-solid border-gray-300 rounded-[10px] text-[16px] w-full p-2 focus:outline-none focus:border-red-500'
+                                />
+                            </div>
+                            <div className='location mb-4'>
+                                <p className='font-bold mb-2'>City</p>
+                                <input
+                                    type="text"
+                                    placeholder="City"
+                                    name="city"
+                                    value={formLocation.city}
+                                    onChange={handleChangeLocation}
+                                    required
+                                    className='border-[1px] border-solid border-gray-300 rounded-[10px] text-[16px] w-full p-2 focus:outline-none focus:border-red-500'
+                                />
+                            </div>
+                        </div>
+                        <div className='half grid grid-cols-1 sm:grid-cols-2 gap-5'>
+                            <div className="location mb-4">
+                                <p className='font-bold mb-2'>Province</p>
+                                <input
+                                    type="text"
+                                    placeholder="Province"
+                                    name="province"
+                                    value={formLocation.province}
+                                    onChange={handleChangeLocation}
+                                    required
+                                    className='border-[1px] border-solid border-gray-300 rounded-[10px] text-[16px] w-full p-2 focus:outline-none focus:border-red-500'
+                                />
+                            </div>
+                            <div className="location mb-4">
+                                <p className='font-bold mb-2'>Country</p>
+                                <input
+                                    type="text"
+                                    placeholder="Country"
+                                    name="country"
+                                    value={formLocation.country}
+                                    onChange={handleChangeLocation}
+                                    required
+                                    className='border-[1px] border-solid border-gray-300 rounded-[10px] text-[16px] w-full p-2 focus:outline-none focus:border-red-500'
+                                />
+                            </div>
+                        </div>
                 </div>
 
             </form>
