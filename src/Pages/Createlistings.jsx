@@ -3,6 +3,8 @@ import { categories,types,facilities } from '../Data'
 import Navbar from '../Components/Navbar'
 const Createlistings = () => {
     const [category,setCategory]=useState('')
+    const [type,setType]=useState('')
+    console.log(types)
     const handlePost=()=>{
 
     }
@@ -20,14 +22,14 @@ const Createlistings = () => {
                     {
                         categories.map((item,index)=>(
                             <div 
-                            className={`category flex flex-col justify-center items-center w-[110px] h-[90px] border border-solid border-gray-600 cursor-pointer hover:bg-gray-200 duration-150 ${category===item.label ? 'text-red-500 bg-gray-100':''}  group` }
+                            className={`category flex flex-col justify-center items-center w-[110px] h-[90px] border border-solid border-gray-300 cursor-pointer hover:bg-gray-200 duration-150 ${category===item.label ? 'text-red-500 bg-gray-100 border-red-500 group:':''}  group` }
                             key={index} 
                             onClick={() => setCategory(item.label)}
                           >
-                            <div className="category_icon text-[30px] text-black group-hover:text-red-500 duration-150">
+                            <div className={`category_icon text-[30px] text-black group-hover:text-red-500 duration-150 ${category===item.label ? 'text-red-500':''}`}>
                               {item.icon}
                             </div>
-                            <p className='text-black text-center font-bold group-hover:text-red-500 duration-150'>
+                            <p className={`text-black text-center font-bold group-hover:text-red-500 duration-150 ${category===item.label ?'text-red-500':''}`}>
                               {item.label}
                             </p>
                           </div>
@@ -36,6 +38,20 @@ const Createlistings = () => {
                     }
 
                 </div>
+                <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>What type of place will guests have?</h3>
+                    <div className='type-list flex flex-col gap-5'>
+                        {
+                            types.map((item,index)=>(
+                                <div key={index} className={`type flex justify-between items-center max-w-[600px] px-2 py-2 border border-gray-100 rounded-[10px] cursor-pointer ${type===item.name ? 'text-red-500 border-red-500 bg-gray-200' :''} hover:bg-gray-200 hover:text-red-500 duration-150 group`} onClick={()=>setType(item.name)}>
+                                    <div className={`type_text max-w-[400px]`}>
+                    <h4 className='mb-[5px]'>{item.name}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                  <div className={`type_icon text-[30px] hover:text-red-500 duration-150 ${type===item.name ? 'text-red-500':''}`}>{item.icon}</div>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
 
             </form>
