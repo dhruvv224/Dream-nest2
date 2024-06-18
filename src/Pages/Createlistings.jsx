@@ -5,6 +5,20 @@ const Createlistings = () => {
     const [category,setCategory]=useState('')
     const [type,setType]=useState('')
     console.log(types)
+    const[formLocation,setFormLocation]=useState({
+        streetAddress:'',
+        aptSuite:'',
+        city:'',
+        province:'',
+        country:'',
+    })
+    const handleChangeLocation=(e)=>{
+        const {name,value}=e.target;
+        setFormLocation({
+            ...formLocation,
+            [name]:value,
+        })
+    }
     const handlePost=()=>{
 
     }
