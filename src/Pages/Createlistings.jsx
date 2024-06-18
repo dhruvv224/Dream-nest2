@@ -42,7 +42,7 @@ const Createlistings = () => {
                     <div className='type-list flex flex-col gap-5'>
                         {
                             types.map((item,index)=>(
-                                <div key={index} className={`type flex justify-between items-center max-w-[600px] px-2 py-2 border border-gray-100 rounded-[10px] cursor-pointer ${type===item.name ? 'text-red-500 border-red-500 bg-gray-200' :''} hover:bg-gray-200 hover:text-red-500 duration-150 group`} onClick={()=>setType(item.name)}>
+                                <div key={index} className={`type flex justify-between items-center max-w-[600px] px-2 py-2 border border-gray-100 rounded-[10px] cursor-pointer ${type===item.name ? 'text-red-500 border-red-500 bg-gray-100' :''} hover:bg-gray-00 hover:text-red-500 duration-150 group`} onClick={()=>setType(item.name)}>
                                     <div className={`type_text max-w-[400px]`}>
                     <h4 className='mb-[5px]'>{item.name}</h4>
                     <p>{item.description}</p>
@@ -52,6 +52,64 @@ const Createlistings = () => {
                             ))
                         }
                     </div>
+                    
+            <h3>Where's your place located?</h3>
+            <div className="full">
+              <div className="location">
+                <p>Street Address</p>
+                <input type='text' placeholder='Street Address' name='streetAddress' value={formLocation.streetAddress} onChange={handleChangeLocation} required/>
+                </div>
+                </div>
+                <div className='half'>
+                    <div className='location'>
+
+<p>Apartment, Suite, etc. (if applicable)</p>
+                <input
+                  type="text"
+                  placeholder="Apt, Suite, etc. (if applicable)"
+                  name="aptSuite"
+                  value={formLocation.aptSuite}
+                  onChange={handleChangeLocation}
+                  required
+                />
+                    </div>
+                    <div className='location'>
+                        <p>City</p>
+                        <input
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  value={formLocation.city}
+                  onChange={handleChangeLocation}
+                  required
+                />
+                    </div>
+
+                </div>
+                <div className="half">
+              <div className="location">
+                <p>Province</p>
+                <input
+                  type="text"
+                  placeholder="Province"
+                  name="province"
+                  value={formLocation.province}
+                  onChange={handleChangeLocation}
+                  required
+                />
+              </div>
+              <div className="location">
+                <p>Country</p>
+                <input
+                  type="text"
+                  placeholder="Country"
+                  name="country"
+                  value={formLocation.country}
+                  onChange={handleChangeLocation}
+                  required
+                />
+              </div>
+            </div>
                 </div>
 
             </form>
