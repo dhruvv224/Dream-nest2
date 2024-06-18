@@ -215,7 +215,7 @@ const handleSelectAmenities=(facility)=>{
                 </div>
                 </div>
                 </div>
-<div className='create-listings_step2 bg-white pt-[30px] pr-[40px] rounded-[20px] mt-[40px]'>
+                <div className='create-listings_step1 bg-white pt-[30px] pr-[40px] p-6 rounded-[20px] mt-[40px]'>
 <h2 className='text-red-500 text-[24px] font-bold'>Step 2: Make your place stand out</h2>
 <hr/>
 <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Tell guests what your place has to offer</h3>
@@ -224,8 +224,11 @@ const handleSelectAmenities=(facility)=>{
 
 {
     facilities?.map((item,index)=>(
-        <div className={`facilty flex flex-col justify-center items-center w-[200px] h-[90px] border-[1px] border-gray-200 rounded-xl cursor-pointer duration-150 hover:text-red-500 hover:border-red-500`} key={index} onClick={() => handleSelectAmenities(item.name)}>
-            <div className='facility_icon text-[30px]'>{item.icon}</div>
+<div 
+  className={`facilty flex flex-col justify-center items-center w-[200px] h-[90px] border-[1px] rounded-xl cursor-pointer duration-150 
+  ${amenities.includes(item.name) ? 'border-red-500 text-red-500' : 'border-gray-200 hover:text-red-500 hover:border-red-500'}`} 
+  key={index} 
+  onClick={() => handleSelectAmenities(item.name)}>            <div className='facility_icon text-[30px]'>{item.icon}</div>
             <p className='font-semibold'>{item.name}</p>
         </div>
     ))
