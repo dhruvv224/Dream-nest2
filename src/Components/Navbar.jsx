@@ -50,9 +50,16 @@ const Navbar = () => {
                     <CiSearch className='h-[70px] w-[30px] cursor-pointer' onClick={alert2} />
                 </div>
                 <div className='navbar_right flex items-center gap-5'>
-                    <Link to='/' className='ml-2'>
+                   { user ?(
+                       <Link to='/create-listings' className='ml-2'>
                         Become A Host
-                    </Link>
+                        </Link>
+                   ):(
+                    <Link to='/login' className='ml-2'>
+                    Become A Host
+                   </Link>
+                   )
+                   }
                     <button
                         className='navbar_right_button md:h-[50px] flex items-center p-3 md:p-4 m-1 border border-gray-500 rounded-[30px] gap-2 bg-white cursor-pointer hover:shadow-lg'
                         onClick={() => setDropdownMenu(!dropdownMenu)}
