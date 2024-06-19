@@ -70,7 +70,22 @@ const Createlistings = () => {
         prevPhotos.filter((_, index) => index !== indexToRemove)
       );
     };
+// ADD DESCRIPTIONS
+ const [formDescription,setFormDescription]=useState({
+    title:'',
+    description:'',
+    highlight:'',
+    highlightDeec:'',
+    price:''
+ })
+ const handleChangeDescription=(e)=>{
+    const {name,value}=e.target
+    setFormDescription({
+        ...formDescription,
+        [name]:value,
+    })
 
+ }
     const handlePost = () => {
         // handle post logic here
     };
@@ -275,6 +290,7 @@ const Createlistings = () => {
                         <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Add photos to your listing</h3>
                         <p className='text-black/70'>You can add up to 20 photos</p>
                         <h1 className='text-[24px] text-red-600'> This is feature is under develop </h1>
+                        
                         {/* <DragDropContext onDragEnd={handleDragPhoto}>
               <Droppable droppableId="photos" direction="horizontal">
                 {(provided) => (
@@ -353,7 +369,19 @@ const Createlistings = () => {
                 )}
               </Droppable>
                         </DragDropContext> */}
-
+<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>What make your place attractive and exciting?</h3>
+                        <div className="description">
+                            <p>title</p>
+                            <input type='text' placeholder='title' name='title' value={formDescription.title} onChange={handleChangeDescription} required/>
+                            <p>Description</p>
+                            <textarea type='text' placeholder='Description' name='description' value={formDescription.description} onChange={handleChangeDescription} required/>
+                            <p>Highlight</p>
+                            <input type='text' placeholder='highlights' name='highlight' value={formDescription.highlight} onChange={handleChangeDescription} required/>
+                            <p>Highlight details</p>
+                            <input type='text' placeholder='Highligh Details' name='highlightDesc' value={formDescription.highlightDeec} onChange={handleChangeDescription} required/>
+                            <p>Price</p>
+                            <input type='number' placeholder='Enter price' name='price' value={formDescription.price} onChange={handleChangeDescription} required/>
+                            </div>
                     </div>
                 </form>
             </div>
