@@ -5,6 +5,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
 import Navbar from '../Components/Navbar';
 import { BiTrash } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
 
 const Createlistings = () => {
     // Categories
@@ -19,6 +20,7 @@ const Createlistings = () => {
         province: '',
         country: ''
     });
+
 
     // Handle locations logic
     const handleChangeLocation = (e) => {
@@ -86,8 +88,13 @@ const Createlistings = () => {
     })
 
  }
-    const handlePost = () => {
-        // handle post logic here
+//   creator id
+const creatorId=useSelector((state)=>state.user._id)
+console.log(creatorId)
+    const handlePost = (e) => {
+        e.preventDefualt()
+        const listingForm=new FormData()
+
     };
 
     return (
@@ -381,7 +388,7 @@ const Createlistings = () => {
       name='title'
       value={formDescription.title}
       onChange={handleChangeDescription}
-      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500 duration-150'
       required
     />
   </div>
