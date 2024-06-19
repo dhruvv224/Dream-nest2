@@ -433,7 +433,7 @@ const Createlistings = () => {
     />
   </div>
 </div>
-<button className='submit_btm mt-[30px] rounded-2xl p-4 text-white bg-red-500 hover:bg-red-600 duration-150 border-none' type='submit'>
+<button className='submit_btm mt-[10px] hover:shadow-md rounded-xl p-3 text-white bg-red-500 hover:bg-red-600 duration-150 border-none' type='submit'>
     Create Your Listings
 </button>
                     </div>
