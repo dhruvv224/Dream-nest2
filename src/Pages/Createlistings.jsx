@@ -78,7 +78,7 @@ const Createlistings = () => {
     title:'',
     description:'',
     highlight:'',
-    highlightDeec:'',
+    highlightDesc:'',
     price:''
  })
  const handleChangeDescription=(e)=>{
@@ -93,7 +93,8 @@ const Createlistings = () => {
 const creatorId=useSelector((state)=>state.user.user.firstName)
 console.log("creator id is",creatorId)
     const handlePost = async(e) => {
-        e.preventDefualt()     
+         
+        e.preventDefault();  
 try {
     const listingForm=new FormData()
     listingForm.append("creator",creatorId)
@@ -166,7 +167,21 @@ try {
                                 ))
                             }
                         </div>
+<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Tell guests what your place has to offer</h3>
+<div className='amenities flex flex-wrap gap-[20px]'>
+{
+facilities?.map((item,index)=>(
 
+<div 
+  className={`facilty flex flex-col justify-center items-center w-[200px] h-[90px] border-[1px] rounded-xl cursor-pointer duration-150 
+  ${amenities.includes(item.name) ? 'border-red-500 text-red-500' : 'border-gray-200 hover:text-red-500 hover:border-red-500'}`} 
+  key={index} 
+  onClick={() => handleSelectAmenities(item.name)}>            <div className='facility_icon text-[30px]'>{item.icon}</div>
+            <p className='font-semibold'>{item.name}</p>
+        </div>
+    ))
+}
+</div>
                         <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Where's your place located?</h3>
                         <div className="full max-w-[700px] mb-6">
                             <div className="location mb-4">
