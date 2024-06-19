@@ -35,7 +35,7 @@ const Footer = () => {
          <CiMail/>
             <p className='ml-[10px]'>dreamnest@support.com</p>
          </div>
-          <img src='/assets/payment.png' className=''/>
+          <img src='/assets/payment.png' className='pb-[10px]'/>
 
             
         </div>

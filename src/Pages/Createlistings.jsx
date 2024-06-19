@@ -167,21 +167,24 @@ try {
                                 ))
                             }
                         </div>
-<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Tell guests what your place has to offer</h3>
-<div className='amenities flex flex-wrap gap-[20px]'>
-{
-facilities?.map((item,index)=>(
-
-<div 
-  className={`facilty flex flex-col justify-center items-center w-[200px] h-[90px] border-[1px] rounded-xl cursor-pointer duration-150 
-  ${amenities.includes(item.name) ? 'border-red-500 text-red-500' : 'border-gray-200 hover:text-red-500 hover:border-red-500'}`} 
-  key={index} 
-  onClick={() => handleSelectAmenities(item.name)}>            <div className='facility_icon text-[30px]'>{item.icon}</div>
-            <p className='font-semibold'>{item.name}</p>
-        </div>
+                        <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>
+  Tell guests what your place has to offer
+</h3>
+<div className='amenities flex flex-wrap md:justify-start justify-center gap-[20px]'>
+  {
+    facilities?.map((item, index) => (
+      <div
+        className={`facility flex flex-col items-center justify-center w-[200px] h-[90px] border-[1px] rounded-xl cursor-pointer duration-150 
+        ${amenities.includes(item.name) ? 'border-red-500 text-red-500' : 'border-gray-200 hover:text-red-500 hover:border-red-500'}`}
+        key={index}
+        onClick={() => handleSelectAmenities(item.name)}>
+        <div className='facility_icon text-[30px]'>{item.icon}</div>
+        <p className='font-semibold'>{item.name}</p>
+      </div>
     ))
-}
+  }
 </div>
+
                         <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Where's your place located?</h3>
                         <div className="full max-w-[700px] mb-6">
                             <div className="location mb-4">
@@ -306,66 +309,7 @@ facilities?.map((item,index)=>(
                     />
                 </div>
             </div>
-                            <div className='basics_option'>
-                                <p className="font-bold mb-2">Bedrooms</p>
-                                <div className="basics_buttons flex items-center gap-2">
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBedroomCount(Math.max(bedroomCount - 1, 1))}
-                                    >
-                                        <RemoveCircleOutline />
-                                    </button>
-                                    <span>{bedroomCount}</span>
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBedroomCount(bedroomCount + 1)}
-                                    >
-                                        <AddCircleOutline />
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='basics_option'>
-                                <p className="font-bold mb-2">Beds</p>
-                                <div className="basics_buttons flex items-center gap-2">
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBedCount(Math.max(bedCount - 1, 1))}
-                                    >
-                                        <RemoveCircleOutline />
-                                    </button>
-                                    <span>{bedCount}</span>
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBedCount(bedCount + 1)}
-                                    >
-                                        <AddCircleOutline />
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='basics_option'>
-                                <p className="font-bold mb-2">Bathrooms</p>
-                                <div className="basics_buttons flex items-center gap-2">
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBathroomCount(Math.max(bathroomCount - 1, 1))}
-                                    >
-                                        <RemoveCircleOutline />
-                                    </button>
-                                    <span>{bathroomCount}</span>
-                                    <button
-                                        type="button"
-                                        className="basics_button"
-                                        onClick={() => setBathroomCount(bathroomCount + 1)}
-                                    >
-                                        <AddCircleOutline />
-                                    </button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
