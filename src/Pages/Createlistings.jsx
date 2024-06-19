@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { categories,types,facilities } from '../Data'
 import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 import Navbar from '../Components/Navbar'
 const Createlistings = () => {
@@ -41,6 +42,25 @@ const handleSelectAmenities=(facility)=>{
         setAmenities((prev)=>[...prev,facility])
     }
 }
+// HANDLEDRAGPHOTOS , UPLOAD DRAG AND DROP ,REMOVE PHOTOS
+const [photos,setPhotos]=useState([])
+const handleUploadPhotos=(e)=>
+    {
+        const newPhotos=e.target.files
+        setPhotos((prevPhotos)=>[...prevPhotos,...newPhotos])
+    }
+    const handleDragPhoto=(result)=>{
+        if(!result.destination)return;
+        const items=Array.from(photos)
+        const [recordedItem]=items.splice(result.source.index,1)
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        setPhotos(items)
+    }
+    const handleRemovePhoto=(indexToRemove)=>{
+    setPhotos((prevPhotos)=> prevPhotos.filter((_,index)=>index!==indexToRemove))
+    }
+
     const handlePost=()=>{
 
     }
@@ -234,6 +254,7 @@ const handleSelectAmenities=(facility)=>{
     ))
 }
 </div>
+<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Add some photos of you place</h3>
 
 </div>
             </form>
