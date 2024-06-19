@@ -7,7 +7,7 @@ import Navbar from '../Components/Navbar';
 import { BiTrash } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import Listing from './Listing';
-
+import axios from 'axios'
 const Createlistings = () => {
     // Categories
     const [category, setCategory] = useState('');
