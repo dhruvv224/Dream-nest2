@@ -369,19 +369,73 @@ const Createlistings = () => {
                 )}
               </Droppable>
                         </DragDropContext> */}
-<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>What make your place attractive and exciting?</h3>
-                        <div className="description">
-                            <p>title</p>
-                            <input type='text' placeholder='title' name='title' value={formDescription.title} onChange={handleChangeDescription} required/>
-                            <p>Description</p>
-                            <textarea type='text' placeholder='Description' name='description' value={formDescription.description} onChange={handleChangeDescription} required/>
-                            <p>Highlight</p>
-                            <input type='text' placeholder='highlights' name='highlight' value={formDescription.highlight} onChange={handleChangeDescription} required/>
-                            <p>Highlight details</p>
-                            <input type='text' placeholder='Highligh Details' name='highlightDesc' value={formDescription.highlightDeec} onChange={handleChangeDescription} required/>
-                            <p>Price</p>
-                            <input type='number' placeholder='Enter price' name='price' value={formDescription.price} onChange={handleChangeDescription} required/>
-                            </div>
+<h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>
+  What makes your place attractive and exciting?
+</h3>
+<div className="description">
+  <div className="mb-4">
+    <p className='font-bold mb-2'>Title</p>
+    <input
+      type='text'
+      placeholder='Title'
+      name='title'
+      value={formDescription.title}
+      onChange={handleChangeDescription}
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <p className='font-bold mb-2'>Description</p>
+    <textarea
+      placeholder='Description'
+      name='description'
+      value={formDescription.description}
+      onChange={handleChangeDescription}
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <p className='font-bold mb-2'>Highlight</p>
+    <input
+      type='text'
+      placeholder='Highlights'
+      name='highlight'
+      value={formDescription.highlight}
+      onChange={handleChangeDescription}
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <p className='font-bold mb-2'>Highlight Details</p>
+    <input
+      type='text'
+      placeholder='Highlight Details'
+      name='highlightDesc'
+      value={formDescription.highlightDesc}
+      onChange={handleChangeDescription}
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <p className='font-bold mb-2'>Price</p>
+    <input
+      type='number'
+      placeholder='Enter price'
+      name='price'
+      value={formDescription.price}
+      onChange={handleChangeDescription}
+      className='border border-gray-300 rounded-[10px] text-[16px] font-semibold w-full md:w-[600px] p-2 focus:outline-none focus:border-red-500'
+      required
+    />
+  </div>
+</div>
+<button className='submit_btm mt-[30px] rounded-2xl p-4 text-white bg-red-500 hover:bg-red-600 duration-150 border-none' type='submit'>
+    Create Your Listings
+</button>
                     </div>
                 </form>
             </div>
