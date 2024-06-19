@@ -52,7 +52,7 @@ const handleUploadPhotos=(e)=>
     const handleDragPhoto=(result)=>{
         if(!result.destination)return;
         const items=Array.from(photos)
-        const [recordedItem]=items.splice(result.source.index,1)
+        const [reorderedItem]=items.splice(result.source.index,1)
         items.splice(result.destination.index, 0, reorderedItem);
 
         setPhotos(items)
