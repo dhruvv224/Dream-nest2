@@ -22,7 +22,7 @@ const getFeedListings=async()=>
 {
         try {
             console.log(selectedCategory)
-            const response=await axios.get(selectedCategory =="ALL"?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
+            const response=await axios.get(selectedCategory !=="ALL"?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
             const data=response.data
             console.log(data.listings)   
             dispatch(setListings({data}))
