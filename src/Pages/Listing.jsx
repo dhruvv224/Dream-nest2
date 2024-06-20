@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { categories } from '../Data';
 import Loader from '../Components/Loader';
 import axios from 'axios';
-
+import { setListings } from '../Store/Slice';
+import { useDispatch } from 'react-redux';
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('ALL');
     const [isLoading, setIsLoading] = useState(true);
-
+    const dispatch=useDispatch()
     // Simulating data fetching or loading time
     useEffect(() => {
         setTimeout(() => {
@@ -17,20 +18,24 @@ const Listing = () => {
     const handleCategory = (category) => {
         setSelectedCategory(category);
     };
-    const getFeedListings=async()=>{
+const getFeedListings=async()=>
+{
         try {
-            const response=await axios.get(selectedCategory ==""?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
+            const response=await axios.get(selectedCategory =="ALL"?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
             const data=response.data
-            console.log(data)   
-
+            console.log(data.listings)   
+            dispatch(setListings({data}))
             
         } catch (error) {
             console.log(error)
-            
+
             
         }
 
-    }
+}
+    useEffect(()=>{
+        getFeedListings();
+    },[selectedCategory])
 
     const categoryContainerStyle = {
         padding: '50px 60px',
