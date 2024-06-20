@@ -5,7 +5,7 @@ import axios from 'axios';
 import { setListings } from '../Store/Slice';
 import { useDispatch } from 'react-redux';
 const Listing = () => {
-    const [selectedCategory, setSelectedCategory] = useState('ALL');
+    const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(true);
     const dispatch=useDispatch()
     // Simulating data fetching or loading time
@@ -22,9 +22,11 @@ const getFeedListings=async()=>
 {
         try {
             console.log(selectedCategory)
-            const response=await axios.get(selectedCategory !=="ALL"?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
+            const response = await axios.get(selectedCategory === "All" 
+                ? "http://localhost:8000/api/listings" 
+                : `http://localhost:8000/api/listings/${selectedCategory}`);
             const data=response.data
-            console.log(data.listings)   
+            console.log("founded listings are",data.listings)   
             dispatch(setListings({data}))
         } catch (error) {
             console.log(error)
