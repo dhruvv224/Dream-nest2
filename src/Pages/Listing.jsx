@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { categories } from '../Data';
 import Loader from '../Components/Loader';
+import axios from 'axios';
 
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('ALL');
@@ -16,6 +17,20 @@ const Listing = () => {
     const handleCategory = (category) => {
         setSelectedCategory(category);
     };
+    const getFeedListings=async()=>{
+        try {
+            const response=await axios.get(selectedCategory ==""?"http://localhost:8000/api/listings":`http://localhost:8000/api/listings/${selectedCategory}`)
+            const data=response.data
+            console.log(data)   
+
+            
+        } catch (error) {
+            console.log(error)
+            
+            
+        }
+
+    }
 
     const categoryContainerStyle = {
         padding: '50px 60px',
