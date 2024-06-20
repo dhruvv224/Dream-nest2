@@ -26,6 +26,7 @@ const getFeedListings=async()=>
                 ? "http://localhost:8000/api/listings" 
                 : `http://localhost:8000/api/listings/${selectedCategory}`);
             const data=response.data
+            console.log(data)
             console.log("founded listings are",data.listings)   
             dispatch(setListings({data}))
         } catch (error) {
