@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(true);
+    const[categorynotFound,setcategoryanotfound]=useState(false);
+    console.log(categorynotFound)
     const dispatch=useDispatch()
     // Simulating data fetching or loading time
     useEffect(() => {
@@ -30,6 +32,10 @@ const getFeedListings=async()=>
             console.log("founded listings are",data.listings)
             const Listings=data.listings   
             dispatch(setListings({Listings}))
+            if(Listings.length<1)
+                {
+                    setcategoryanotfound(true)
+                }
         } catch (error) {
             console.log(error)
 
