@@ -32,10 +32,14 @@ const getFeedListings=async()=>
             console.log("founded listings are",data.listings)
             const Listings=data.listings   
             dispatch(setListings({Listings}))
-            if(Listings.length<1)
+            if(Listings.length===0)
                 {
                     setcategoryanotfound(true)
                 }
+            else
+            {
+                setcategoryanotfound(false)
+            }
         } catch (error) {
             console.log(error)
 
@@ -68,7 +72,7 @@ const getFeedListings=async()=>
                 <div className="max-w-[1200px] w-full mx-auto">
                     <div style={categoryContainerStyle}>
                         {categories.map((item, index) => (
-                            <div className={`category1 ${selectedCategory === item.label ? 'text-red-600' : 'text-black'} hover:text-red-600 duration-200 text-black text-[30px]`} style={categoryItemStyle} key={index} onClick={() => handleCategory(item.label)}>
+                            <div className={`category1 ${selectedCategory === item.label ? 'text-red-600' : 'text-black'} hover:text-red-600 duration-200 text-black text-[30px] md:text-[30px]`} style={categoryItemStyle} key={index} onClick={() => handleCategory(item.label)}>
                                 <div className='category_icons'>
                                     {item.icon}
                                 </div>

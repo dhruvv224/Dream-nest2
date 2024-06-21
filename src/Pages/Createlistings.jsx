@@ -91,7 +91,7 @@ const Createlistings = () => {
  }
 //   creator id
 const creatorId=useSelector((state)=>state.user.user.firstName)
-console.log("creator id is",creatorId)
+// console.log("creator id is",creatorId)
     const handlePost = async(e) => {
          
         e.preventDefault();  
