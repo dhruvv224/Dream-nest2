@@ -319,7 +319,22 @@ const Createlistings = () => {
                         <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Add photos to your listing</h3>
                         <p className='text-black/70'>You can add up to 20 photos</p>
                         <h1 className='text-[24px] text-red-600'> This is feature is under develop </h1>
-                        
+                        <div className="flex flex-col items-center justify-center">
+      <input
+        type="file"
+        id="photos"
+        style={{ display: 'none' }}
+        accept="image/*"
+        onChange={handleUploadPhotos}
+        multiple
+      />
+      <label htmlFor="photos" className="cursor-pointer p-4 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-gray-400 transition">
+        <div className="text-3xl text-gray-500 mb-2">
+          <IoIosImages />
+        </div>
+        <p className="text-gray-700">Upload from device</p>
+      </label>
+    </div>
                         {/* <DragDropContext onDragEnd={handleDragPhoto}>
               <Droppable droppableId="photos" direction="horizontal">
                 {(provided) => (
