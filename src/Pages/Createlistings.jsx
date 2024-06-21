@@ -91,39 +91,43 @@ const Createlistings = () => {
 
  }
 //   creator id
-// const creatorId=useSelector((state)=>state.user.user.firstName)
-// console.log("creator id is",creatorId)
+const creatorId=useSelector((state)=>state.user.user.firstName)
+console.log("creator id is",creatorId)
     const handlePost = async(e) => {
          
         e.preventDefault();  
-// try {
-//     const listingForm=new FormData()
-//     listingForm.append("creator",creatorId)
-//     listingForm.append("category",category)
-//     listingForm.append("type",type);
-//     listingForm.append("streetAddress",formLocation.streetAddress)
-//     listingForm.append("aptSuite",formLocation.aptSuite)
-//     listingForm.append("city",formLocation.city)
-//     listingForm.append("province",formLocation.province)
-//     listingForm.append("country",formLocation.country)
-//     listingForm.append("guestCount",guestCount)
-//     listingForm.append("bedroomCount",bedroomCount)
-//     listingForm.append("bedCount",bedCount);
-//     listingForm.append("bathroomCount",bathroomCount);
-//     listingForm.append("amenities",amenities);
-//     listingForm.append("title",formDescription.title)
-//     listingForm.append("description",formDescription.description)
-//     listingForm.append("highlight",formDescription.highlight)
-//     listingForm.append("highlightDesc",formDescription.highlightDeec);
-//     listingForm.append("price",formDescription.price)
-//     const response=await axios.post("http://localhost:8000/api/listings/createlistings",listingForm)
-//     console.log(response)
-//     console.log(listingForm)
-// } catch (error) {
-//     console.log("there is an error",error.message)
+try {
+    const listingForm=new FormData()
+    listingForm.append("creator",creatorId)
+    listingForm.append("category",category)
+    listingForm.append("type",type);
+    listingForm.append("streetAddress",formLocation.streetAddress)
+    listingForm.append("aptSuite",formLocation.aptSuite)
+    listingForm.append("city",formLocation.city)
+    listingForm.append("province",formLocation.province)
+    listingForm.append("country",formLocation.country)
+    listingForm.append("guestCount",guestCount)
+    listingForm.append("bedroomCount",bedroomCount)
+    listingForm.append("bedCount",bedCount);
+    listingForm.append("bathroomCount",bathroomCount);
+    listingForm.append("amenities",amenities);
+    listingForm.append("title",formDescription.title)
+    listingForm.append("description",formDescription.description)
+    listingForm.append("highlight",formDescription.highlight)
+    listingForm.append("highlightDesc",formDescription.highlightDeec);
+    listingForm.append("price",formDescription.price)
+// append each seleceted photos to the form data
+photos.forEach((photo)=>{
+  listingForm.append("listingPhotos",photo)
+})
+    const response=await axios.post("http://localhost:8000/api/listings/createlistings",listingForm)
+    console.log(response)
+    console.log(listingForm)
+} catch (error) {
+    console.log("there is an error",error.message)
     
     
-// }
+}
     };
 
     return (
@@ -337,14 +341,14 @@ const Createlistings = () => {
       </label>
     {
       photos.length>=1 &&(
-        <div className='grid grid-cols-4 gap-4 mt-4'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
           {
             photos.map((photo,index)=>(
               <div key={index} className='border rounded-lg overflow-hidden'>
               <img
                 src={URL.createObjectURL(photo)}
                 alt={`Uploaded ${index}`}
-                className="w-full h-full object-cover"
+                className="w-full h-[220px] object-cover"
               />
               </div>
             ))
