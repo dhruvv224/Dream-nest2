@@ -56,8 +56,9 @@ const Createlistings = () => {
     const handleUploadPhotos = (e) => {
       const newPhotos = e.target.files;
       setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
+      
     };
-  
+  console.log(photos)
     const handleDragPhoto = (result) => {
       if (!result.destination) return;
   
@@ -319,7 +320,7 @@ const Createlistings = () => {
                         <h3 className='mt-[40px] text-[20px] font-medium mb-5 text-blue-500'>Add photos to your listing</h3>
                         <p className='text-black/70'>You can add up to 20 photos</p>
                         <h1 className='text-[24px] text-red-600'> This is feature is under develop </h1>
-                        <div className="flex flex-col items-center justify-center">
+                        <div className="flex mt-2 mb-3 flex-col items-start justify-center">
       <input
         type="file"
         id="photos"
@@ -328,13 +329,32 @@ const Createlistings = () => {
         onChange={handleUploadPhotos}
         multiple
       />
-      <label htmlFor="photos" className="cursor-pointer p-4 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-gray-400 transition">
+      <label htmlFor="photos" className="cursor-pointer flex flex-col items-center justify-center p-3 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-gray-400 transition">
         <div className="text-3xl text-gray-500 mb-2">
           <IoIosImages />
         </div>
         <p className="text-gray-700">Upload from device</p>
       </label>
+    {
+      photos.length>=1 &&(
+        <div className='grid grid-cols-4 gap-4 mt-4'>
+          {
+            photos.map((photo,index)=>(
+              <div key={index} className='border rounded-lg overflow-hidden'>
+              <img
+                src={URL.createObjectURL(photo)}
+                alt={`Uploaded ${index}`}
+                className="w-full h-full object-cover"
+              />
+              </div>
+            ))
+          }
+        </div>
+      )
+    }
     </div>
+    <hr/>
+   
                         {/* <DragDropContext onDragEnd={handleDragPhoto}>
               <Droppable droppableId="photos" direction="horizontal">
                 {(provided) => (
