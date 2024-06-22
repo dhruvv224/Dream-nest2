@@ -144,7 +144,7 @@ photos.forEach((photo)=>{
                             {
                                 categories.map((item, index) => (
                                     <div
-                                        className={`category flex flex-col justify-center items-center w-[110px] h-[90px] border border-solid border-gray-300 cursor-pointer hover:bg-gray-200 duration-150 ${category === item.label ? 'text-red-500 bg-gray-100 border-red-500 group:' : ''}  group`}
+                                        className={`category flex flex-col justify-center items-center w-[111px] h-[90px] border border-solid border-gray-300 cursor-pointer hover:bg-gray-200 duration-150 ${category === item.label ? 'text-red-500 bg-gray-100 border-red-500 group:' : ''}  group`}
                                         key={index}
                                         onClick={() => setCategory(item.label)}
                                     >
