@@ -124,7 +124,7 @@ photos.forEach((photo)=>{
     console.log(response)
     console.log(listingForm)
 } catch (error) {
-    console.log("there is an erroree",error.message)
+    console.log("there is an error",error.message)
     
     
 }
