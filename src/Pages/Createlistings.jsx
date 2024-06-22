@@ -133,7 +133,7 @@ photos.forEach((photo)=>{
     return (
         <div>
             <Navbar />
-            <div className='create-listing bg-gray-100 pt-10 px-16 pb-32'>
+            <div className='createlisting bg-gray-100 pt-10 px-16 pb-32'>
                 <h1 className='text-[28px] text-blue-800 font-bold'>Publish Your Place</h1>
                 <form onSubmit={handlePost}>
                     <div className='create-listings_step1 bg-white pt-[30px] pr-[40px] p-6 rounded-[20px] mt-[40px]'>
