@@ -344,13 +344,19 @@ photos.forEach((photo)=>{
         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
           {
             photos.map((photo,index)=>(
-              <div key={index} className='border rounded-lg overflow-hidden'>
-              <img
-                src={URL.createObjectURL(photo)}
-                alt={`Uploaded ${index}`}
-                className="w-full h-[220px] object-cover"
-              />
-              </div>
+              <div key={index} className='relative border rounded-lg overflow-hidden'>
+  <img
+    src={URL.createObjectURL(photo)}
+    alt={`Uploaded ${index}`}
+    className="w-full h-[220px] object-cover"
+  />
+  <button 
+    className='absolute right-0 top-0 m-2 p-2 bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full text-red-600 hover:text-red-800 text-[20px] cursor-pointer transition duration-300'
+    onClick={() => handleRemovePhoto(index)}
+  >
+    <BiTrash />
+  </button>
+</div>
             ))
           }
         </div>
