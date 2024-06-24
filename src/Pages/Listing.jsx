@@ -4,6 +4,7 @@ import Loader from '../Components/Loader';
 import axios from 'axios';
 import { setListings } from '../Store/Slice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +48,9 @@ const getFeedListings=async()=>
         }
 
 }
+// listing array from redux store 
+const listings=useSelector((state)=>state.listings)
+console.log("listings are>",listings)
     useEffect(()=>{
         getFeedListings();
     },[selectedCategory])
@@ -82,7 +86,18 @@ const getFeedListings=async()=>
                             </div>
                         ))}
                         <div>
-                        <Loader/>
+                        {/* <Loader/> */}
+                        {
+                            listings.map((item,index)=>{
+                                <div className='' key={index}>
+                                    <div className=''>
+                                        <img src='https://localhost:8000/'/>
+                                      
+                                    </div>
+
+                                </div>
+                            })
+                        }
                         </div>
                     </div>
                 </div>
