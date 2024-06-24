@@ -65,7 +65,7 @@ try {
             <h2 className="text-white text-2xl font-bold mb-4 text-center">Login</h2>
             <form onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" className="bg-black bg-opacity-50 text-white text-[18px] rounded-lg px-4 py-2 mb-4 block w-full" name='email'  onChange={(e)=>setEmail(e.target.value)} />
-            <input type="email" placeholder="Passsword" className="bg-black bg-opacity-50 text-white text-[18px] rounded-lg px-4 py-2 mb-4 block w-full" name='email'  onChange={(e)=>setPassword(e.target.value)} />
+            <input type="password" placeholder="Passsword" className="bg-black bg-opacity-50 text-white text-[18px] rounded-lg px-4 py-2 mb-4 block w-full" name='email'  onChange={(e)=>setPassword(e.target.value)} />
             <button className='bg-red-500 hover:bg-red-600 duration-200 text-white text-[18px] rounded-lg px-4 py-2 block w-full'>Login</button>
 
 
