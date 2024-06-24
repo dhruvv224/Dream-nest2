@@ -5,22 +5,14 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setListings } from '../Store/Slice';
 import { BiArrowBack } from 'react-icons/bi';
-import {
-    ArrowForwardIos,
-    ArrowBackIosNew,
-    Favorite,
-  } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
+
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(true);
     const [categoryNotFound, setCategoryNotFound] = useState(false);
-    const[currentIndex,setCurrentIndex]=useState(0);
-    const goToPrevSlide=()=>{
-        setCurrentIndex((prevIndex)=>(prevIndex-1+listings.listingPhotoPaths.length)%listings.listingPhotoPaths.length)
-    }
-    const goToNextSlide=()=>{
-        setCurrentIndex((prevIndex)=>(prevIndex+1)%listings.listingPhotoPaths.length)
-    }
+    const [currentIndex, setCurrentIndex] = useState(0); // State for current slide index
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -40,8 +32,8 @@ const Listing = () => {
                 : `http://localhost:8000/api/listings/${selectedCategory}`);
             const data = response.data;
             const data2 = data.listings;
-            console.log("Fetched Listings:",data2);
-            dispatch(setListings({ listings:data2 })); // Ensure this matches the reducer's expected structure
+            console.log("Fetched Listings:", data2);
+            dispatch(setListings({ listings: data2 }));
 
             setCategoryNotFound(data2.length === 0);
         } catch (error) {
@@ -71,6 +63,14 @@ const Listing = () => {
         cursor: 'pointer',
     };
 
+    const goToPrevSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + listings[currentIndex].listingPhotoPaths.length) % listings[currentIndex].listingPhotoPaths.length);
+    };
+
+    const goToNextSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % listings[currentIndex].listingPhotoPaths.length);
+    };
+
     return (
         <div className="flex justify-center items-center min-h-screen w-full">
             <div className="max-w-[1200px] w-full mx-auto">
@@ -90,41 +90,29 @@ const Listing = () => {
                             </p>
                         </div>
                     ))}
-                    <div>
+                    <div className='grid grid-cols-4 gap-4 '>
                     {isLoading ? <Loader /> :
-                            listings.map((item, index) => {
-                                const [currentIndex, setCurrentIndex] = useState(0);
-
-                                const goToPrevSlide = () => {
-                                    setCurrentIndex((prevIndex) => (prevIndex - 1 + item.listingPhotoPaths.length) % item.listingPhotoPaths.length);
-                                }
-
-                                const goToNextSlide = () => {
-                                    setCurrentIndex((prevIndex) => (prevIndex + 1) % item.listingPhotoPaths.length);
-                                }
-
-                                return (
-                                    <div className='relative' key={index}>
-                                        <div className='slide-container overflow-hidden'>
-                                            <div className='slider flex transition-transform duration-500 ease-in-out' style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                                                {
-                                                    item.listingPhotoPaths.map((photoPath, photoIndex) => (
-                                                        <div className='min-w-full h-full' key={photoIndex}>
-                                                            <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover rounded-[15px]' alt={`${item.creator}`} />
-                                                        </div>
-                                                    ))
-                                                }
-                                            </div>
-                                            <button onClick={goToPrevSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-2">
-                                                <ArrowBackIosNew />
-                                            </button>
-                                            <button onClick={goToNextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black text-white p-2">
-                                                <ArrowForwardIos />
-                                            </button>
+                            listings.map((item, index) => (
+                                <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
+                                    <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
+                                        <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${currentIndex * 300}px)` }}>
+                                            {
+                                                item.listingPhotoPaths.map((photoPath, photoIndex) => (
+                                                    <div className='w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
+                                                        <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover  ' alt={`${item.creator}`} />
+                                                    </div>
+                                                ))
+                                            }
                                         </div>
+                                        <button onClick={goToPrevSlide} className="flex items-center justify-center cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 border-none  text-white p-2">
+                                            <ArrowBackIosNew />
+                                        </button>
+                                        <button onClick={goToNextSlide} className="flex items-center justify-center cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 border-none  text-white p-2">
+                                            <ArrowForwardIos />
+                                        </button>
                                     </div>
-                                );
-                            })
+                                </div>
+                            ))
                         }
                     </div>
                     {categoryNotFound && <div>No listings found for selected category.</div>}
