@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     token: null,
-    listings: []
+    listings: [] // Ensure listings is an array
 };
 
 // Create the slice
@@ -12,7 +12,6 @@ const userSlice = createSlice({
     name: 'user', // Name of the slice
     initialState,
     reducers: {
-        // Reducer to set the user and token in the state
         setUser: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
@@ -20,15 +19,16 @@ const userSlice = createSlice({
         setLogout: (state) => {
             state.user = null;
             state.token = null;
-           
+            state.listings = [];
         },
         setListings: (state, action) => {
-            state.listings = action.payload.listings;
+            console.log("setListings action payload:", action.payload);
+            state.listings = action.payload.listings; // Make sure to use action.payload.listings
         }
     },
 });
 
-// Export the action
+// Export the actions
 export const { setUser, setListings, setLogout } = userSlice.actions;
 
 // Export the reducer
