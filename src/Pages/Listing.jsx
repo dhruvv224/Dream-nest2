@@ -86,7 +86,7 @@ const Listing = () => {
                                         {
                                             item.listingPhotoPaths.map((photoPath,photoIndex)=>(
                                                 <div className='photo-galary'>
-                                        <img src={`http://localhost:8000/${photoPath.listingPhotoPaths}`} className='rounded-[15px]' alt={`${item.creator}`}/>
+                                        <img src={`http://localhost:8000/${photoPath}`} className='rounded-[15px]' alt={`${item.creator}`}/>
 
                                                 </div>
                                             ))
