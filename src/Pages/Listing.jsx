@@ -87,17 +87,17 @@ console.log("listings are>",listings)
                         ))}
                         <div>
                         {/* <Loader/> */}
-                        {
+                        {/* {
                             listings.map((item,index)=>{
                                 <div className='' key={index}>
                                     <div className=''>
-                                        <img src='https://localhost:8000/'/>
+                                        <img src={`http://localhost:8000/${item.listingPhotoPaths}` } className='rounded-[15px] w-[40px] h-[35px]'/>
                                       
                                     </div>
 
                                 </div>
                             })
-                        }
+                        } */}
                         </div>
                     </div>
                 </div>
