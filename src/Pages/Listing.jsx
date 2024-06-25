@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setListings } from '../Store/Slice';
 import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
-
+import { setWishList } from '../Store/Slice';
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ const Listing = () => {
                 ? 'http://localhost:8000/api/listings'
                 : `http://localhost:8000/api/listings/${selectedCategory}`);
             const data = response.data;
-            const data2 = data.listings.map(listing => ({ ...listing, currentIndex: 0 })); // Initialize currentIndex for each listing
+            const data2 = data.listings.map(listing => ({ ...listing, currentIndex: 0, liked: false })); // Initialize currentIndex and liked for each listing
             console.log("Fetched Listings:", data2);
             dispatch(setListings({ listings: data2 }));
 
@@ -59,6 +59,14 @@ const Listing = () => {
         flexDirection: 'column',
         alignItems: 'center',
         cursor: 'pointer',
+    };
+
+    const toggleWishlist = (index) => {
+        const updatedListings = [...listings]; // Create a shallow copy of the listings array
+        updatedListings[index] = { ...updatedListings[index], liked: !updatedListings[index].liked }; // Update the liked property
+        
+        // Logging the selected item when liked state is toggled
+        console.log("Selected item:", updatedListings[index]);
     };
 
     const updateListingIndex = (index, newIndex) => {
@@ -103,18 +111,16 @@ const Listing = () => {
                                 <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
                                     <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
                                         <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
-
                                             {
                                                 item.listingPhotoPaths.map((photoPath, photoIndex) => (
-                                                    <div className=' relative w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
-
+                                                    <div className=' w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
                                                         <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover' alt={`${item.creator}`} />
-                                                        <Favorite/>
-
+                                                        <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : ''}`} onClick={() => toggleWishlist(index)} />
                                                     </div>
                                                 ))
                                             }
                                         </div>
+
                                         <button onClick={() => goToPrevSlide(index)} className="flex items-center justify-center cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 border-none  text-white p-2">
                                             <ArrowBackIosNew />
                                         </button>
@@ -122,23 +128,20 @@ const Listing = () => {
                                             <ArrowForwardIos />
                                         </button>
                                         <div className='flex flex-col '>
-    <h1 className='text-[16px] font-semibold'>
-        {item.title}
-    </h1>
-    <h4 className='text-[15px]'>{item.category}</h4>
-    <h3 className='text-[15px]'>{item.type}</h3>
-    <div className='flex items-center'>
-    <h5 className='text-[15px] font-medium'>₹{item.price}</h5>
-
-    {item.category === "Iconic cities" ? (
-        <span className='inline ml-1'>Per Month</span>
-    ) : (
-        <span className='inline ml-1'>Per Night</span>
-    )}
-    </div>
-  
-</div>
-
+                                            <h1 className='text-[16px] font-semibold'>
+                                                {item.title}
+                                            </h1>
+                                            <h4 className='text-[15px]'>{item.category}</h4>
+                                            <h3 className='text-[15px]'>{item.type}</h3>
+                                            <div className='flex items-center'>
+                                                <h5 className='text-[15px] font-medium'>₹{item.price}</h5>
+                                                {item.category === "Iconic cities" ? (
+                                                    <span className='inline ml-1'>Per Month</span>
+                                                ) : (
+                                                    <span className='inline ml-1'>Per Night</span>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))
