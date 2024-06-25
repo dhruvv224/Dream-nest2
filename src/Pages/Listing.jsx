@@ -60,11 +60,17 @@ const Listing = () => {
         alignItems: 'center',
         cursor: 'pointer',
     };
-
+const [liked,setliked]=useState(false)
+const Wishlist=useSelector((state)=>state.Wishlist)
+console.log("wish list",Wishlist)
     const toggleWishlist = (index) => {
         const updatedListings = [...listings]; // Create a shallow copy of the listings array
         updatedListings[index] = { ...updatedListings[index], liked: !updatedListings[index].liked }; // Update the liked property
-        
+        setliked(!liked);
+        dispatch(setListings({listings:updatedListings}))
+        const likedItems=updatedListings.filter(item=>item.liked)
+        console.log("liked items >>>>>>",likedItems)
+        dispatch(setWishList({Wishlist:likedItems}))
         // Logging the selected item when liked state is toggled
         console.log("Selected item:", updatedListings[index]);
     };
@@ -115,7 +121,7 @@ const Listing = () => {
                                                 item.listingPhotoPaths.map((photoPath, photoIndex) => (
                                                     <div className=' w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
                                                         <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover' alt={`${item.creator}`} />
-                                                        <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : ''}`} onClick={() => toggleWishlist(index)} />
+                                                        <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : 'text-white'}`} onClick={() => toggleWishlist(index)} />
                                                     </div>
                                                 ))
                                             }

@@ -5,7 +5,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     token: null,
-    listings: [] // Ensure listings is an array
+    listings: [], // Ensure listings is an array
+    Wishlist:[]
 };
 
 // Create the slice
