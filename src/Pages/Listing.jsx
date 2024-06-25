@@ -4,14 +4,12 @@ import Loader from '../Components/Loader';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setListings } from '../Store/Slice';
-import { BiArrowBack } from 'react-icons/bi';
-import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
+import { ArrowForwardIos, ArrowBackIosNew } from "@mui/icons-material";
 
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [categoryNotFound, setCategoryNotFound] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0); // State for current slide index
 
     const dispatch = useDispatch();
 
@@ -31,7 +29,7 @@ const Listing = () => {
                 ? 'http://localhost:8000/api/listings'
                 : `http://localhost:8000/api/listings/${selectedCategory}`);
             const data = response.data;
-            const data2 = data.listings;
+            const data2 = data.listings.map(listing => ({ ...listing, currentIndex: 0 })); // Initialize currentIndex for each listing
             console.log("Fetched Listings:", data2);
             dispatch(setListings({ listings: data2 }));
 
@@ -63,12 +61,16 @@ const Listing = () => {
         cursor: 'pointer',
     };
 
-    const goToPrevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + listings[currentIndex].listingPhotoPaths.length) % listings[currentIndex].listingPhotoPaths.length);
+    const goToPrevSlide = (index) => {
+        const updatedListings = [...listings];
+        updatedListings[index].currentIndex = (listings[index].currentIndex - 1 + listings[index].listingPhotoPaths.length) % listings[index].listingPhotoPaths.length;
+        dispatch(setListings({ listings: updatedListings }));
     };
 
-    const goToNextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % listings[currentIndex].listingPhotoPaths.length);
+    const goToNextSlide = (index) => {
+        const updatedListings = [...listings];
+        updatedListings[index].currentIndex = (listings[index].currentIndex + 1) % listings[index].listingPhotoPaths.length;
+        dispatch(setListings({ listings: updatedListings }));
     };
 
     return (
@@ -95,7 +97,7 @@ const Listing = () => {
                             listings.map((item, index) => (
                                 <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
                                     <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
-                                        <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${currentIndex * 300}px)` }}>
+                                        <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
                                             {
                                                 item.listingPhotoPaths.map((photoPath, photoIndex) => (
                                                     <div className='w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
@@ -104,10 +106,10 @@ const Listing = () => {
                                                 ))
                                             }
                                         </div>
-                                        <button onClick={goToPrevSlide} className="flex items-center justify-center cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 border-none  text-white p-2">
+                                        <button onClick={() => goToPrevSlide(index)} className="flex items-center justify-center cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 border-none  text-white p-2">
                                             <ArrowBackIosNew />
                                         </button>
-                                        <button onClick={goToNextSlide} className="flex items-center justify-center cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 border-none  text-white p-2">
+                                        <button onClick={() => goToNextSlide(index)} className="flex items-center justify-center cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 border-none  text-white p-2">
                                             <ArrowForwardIos />
                                         </button>
                                     </div>
@@ -115,7 +117,7 @@ const Listing = () => {
                             ))
                         }
                     </div>
-                    {categoryNotFound && <div>No listings found for selected category.</div>}
+                    {categoryNotFound && <div>No results found for selected category.</div>}
                 </div>
             </div>
         </div>
