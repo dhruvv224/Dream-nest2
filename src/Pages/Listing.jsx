@@ -118,13 +118,14 @@ const patchWishList=async()=>{
                         {isLoading ? <Loader /> :
                             listings.map((item, index) => (
                                 <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
-                                    <Link to={`/listings/${item._id}`}>
                                    
                                     <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
                                         <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
                                             {
                                                 item.listingPhotoPaths.map((photoPath, photoIndex) => (
                                                     <div className=' w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
+                                                                                          
+
                                                         <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover' alt={`${item.creator}`} />
                                                         {
                                                             !item.liked ? (
@@ -135,6 +136,7 @@ const patchWishList=async()=>{
 
                                                             )
                                                         }
+                                                           
                                                     </div>
                                                 ))
                                             }
@@ -147,6 +149,7 @@ const patchWishList=async()=>{
                                             <ArrowForwardIos />
                                         </button>
                                         <div className='flex flex-col '>
+                                        <Link to={`/listings/${item._id}`}>
                                             <h1 className='text-[16px] font-semibold'>
                                                 {item.title}
                                             </h1>
@@ -160,9 +163,11 @@ const patchWishList=async()=>{
                                                     <span className='inline ml-1'>Per Night</span>
                                                 )}
                                             </div>
+                                            </Link>
                                         </div>
+                                     
                                     </div>
-                                    </Link>
+                                 
                                 </div>
                             ))
                         }
