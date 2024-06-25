@@ -91,7 +91,9 @@ console.log("wish list",Wishlist)
         const newIndex = (listings[index].currentIndex + 1) % listings[index].listingPhotoPaths.length;
         updateListingIndex(index, newIndex);
     };
+const patchWishList=async()=>{
 
+}
     return (
         <div className="flex justify-center items-center min-h-screen w-full">
             <div className="max-w-[1200px] w-full mx-auto">
@@ -121,7 +123,15 @@ console.log("wish list",Wishlist)
                                                 item.listingPhotoPaths.map((photoPath, photoIndex) => (
                                                     <div className=' w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
                                                         <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover' alt={`${item.creator}`} />
-                                                        <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : 'text-white'}`} onClick={() => toggleWishlist(index)} />
+                                                        {
+                                                            !item.liked ? (
+                                                                <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : 'text-white'}`} onClick={() => toggleWishlist(index)} />
+
+                                                            ):(
+                                                                <Favorite className={`absolute top-3 right-3 text-red-500 hover:text-red-600 duration-100`} onClick={() => toggleWishlist(index)} />
+
+                                                            )
+                                                        }
                                                     </div>
                                                 ))
                                             }
