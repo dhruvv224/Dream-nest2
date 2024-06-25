@@ -118,7 +118,7 @@ const patchWishList=async()=>{
                         {isLoading ? <Loader /> :
                             listings.map((item, index) => (
                                 <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
-                                    <Link to={`/listings-Card/${item._id}`}>
+                                    <Link to={`/listings/${item._id}`}>
                                    
                                     <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
                                         <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
