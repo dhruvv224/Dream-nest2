@@ -7,7 +7,7 @@ const ListingsCard = () => {
 
     const {id}=useParams()
     console.log(id)
-    const[listing,setListing]=usestate(null)
+    const[listing,setListing]=useState(null)
     // const listings=useSelector((state)=>state.listings)
     // const listingById=listings.filter(item=>item._id===id)
     // console.log(listingById)
