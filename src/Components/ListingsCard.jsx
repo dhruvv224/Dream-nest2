@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 const ListingsCard = () => {
-    const id=useParams()
+    const {id}=useParams()
     console.log(id)
     // const listings=useSelector((state)=>state.listings)
     // const listingById=listings.filter(item=>item._id===id)
     // console.log(listingById)
     const fetchData=async()=>{
 try {
-  const response=await axios.get(`http://localhost:8000/api/listings/id/${id}`)
+  const response=await axios.get(`http://localhost:8000/api/listings/${id}`)
+  const data=response.data
+  console.log(data)
   console.log(response)
   
 } catch (error) {
