@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setListings } from '../Store/Slice';
 import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
 import { setWishList } from '../Store/Slice';
+import { Link } from 'react-router-dom';
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(false);
@@ -117,6 +118,8 @@ const patchWishList=async()=>{
                         {isLoading ? <Loader /> :
                             listings.map((item, index) => (
                                 <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
+                                    <Link to={`/listings-Card/${item._id}`}>
+                                   
                                     <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
                                         <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
                                             {
@@ -159,6 +162,7 @@ const patchWishList=async()=>{
                                             </div>
                                         </div>
                                     </div>
+                                    </Link>
                                 </div>
                             ))
                         }
