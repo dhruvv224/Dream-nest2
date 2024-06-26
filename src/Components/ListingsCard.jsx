@@ -70,9 +70,9 @@ const ListingsCard = () => {
                         <div>
                             <h2 className='text-[22px] font-medium'>What this place offers?</h2>
                             <div className='amenties grid grid-cols-1 max-w-[700px]'>
-                                {listing.amenties[0].split(",").map((item,index)=>(
-                                    <div className='facility' key={index}>
-                                        <div className='facility-icon'>
+                                {listing.amenities[0].split(",").map((item,index)=>(
+                                    <div className='facility flex items-center gap-5 text-[18px] font-semibold mb-[20px]' key={index}>
+                                        <div className='facility-icon text-[30px]'>
                                             {
                                                 facilities.find((facility)=>facility.name===item)?.icon
                                             }
