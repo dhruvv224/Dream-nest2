@@ -28,7 +28,7 @@ const Listing = () => {
         try {
             const response = await axios.get(selectedCategory === 'All'
                 ? 'http://localhost:8000/api/listings'
-                : `http://localhost:8000/api/listings/${selectedCategory}`);
+                : `http://localhost:8000/api/listings/category/${selectedCategory}`);
             const data = response.data;
             const data2 = data.listings.map(listing => ({ ...listing, currentIndex: 0, liked: false })); // Initialize currentIndex and liked for each listing
             console.log("Fetched Listings:", data2);
