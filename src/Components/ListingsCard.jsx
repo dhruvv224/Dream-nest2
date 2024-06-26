@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import Navbar from './Navbar';
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -26,13 +26,25 @@ const ListingsCard = () => {
     }, [listing]);
 
     return (
-        <div className='listing-details md:pt-[40px] md:pr-[130px] md:pb-[120px] pt-[40px] pr-[20px] pb-[120px]'>
+      <div className=''>
+
+      <Navbar/>
+        <div className='listing-details md:pt-[40px] md:pr-[130px] md:pb-[120px] pt-[40px] pr-[20px] pb-[120px] max-w-[1200px] mx-auto'>
             {listing ? (
               
                 <div>
                   <div className='title flex justify-between items-center sm:flex-col sm:items-start sm:gap-[15px]'>
-                  <h1 className='sm:text-[26px] text-[26px]'>{listing.title}</h1>
+                  <h1 className=' text-[36px] font-semibold'>{listing.title}</h1>
                   </div>
+                  <div className="photos flex flex-wrap gap-3 mt-[12px]">
+                    {
+                        listing.listingPhotoPaths.map((item)=>(
+                            <img src={`http://localhost:8000/${item}`} className='max-w-[280px]'/>
+                        ))
+                    }
+
+
+                    </div>
                   
                     <p>{listing.description}</p>
                     <p><strong>Category:</strong> {listing.category}</p>
@@ -56,7 +68,9 @@ const ListingsCard = () => {
                 <p>Loading...</p>
             )}
         </div>
+        </div>
     );
 }
+
 
 export default ListingsCard;
