@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { facilities } from '../Data';
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -52,12 +53,38 @@ const ListingsCard = () => {
                     {listing.guestCount} guests - {listing.bedroomCount} bedroom(s) -{" "}
                     {listing.bedCount} bed(s) - {listing.bathroomCount} bathroom(s)
                     </p>
-                    <hr/>
+                    <hr className='mt-4 mb-4'/>
                     <div className='profile'>
-                        <h3 className='text-[18px] font-normal'>Hosted by {listing.creator}</h3>
+                        <h3 className='text-[18px] font-medium'>Hosted by {listing.creator}</h3>
 
                         </div>
-                  
+                        <hr className='mt-4 mb-4'/>
+
+                        <h3 className='text-[18px] font-medium'>Description</h3>
+                        <p className='mt-4 max-w-[800px]'>{listing.description}</p>
+                        <hr className='mt-4 mb-4'/>
+                        <h3 className='text-[18px] font-normal'>{listing.highlight}</h3>
+                        <p className='mt-4 max-w-[800px]'>{listing.highlight.Desc}</p>
+                        <hr className='mt-4 mb-4'/>
+                    <div className='booking flex justify-between'>
+                        <div>
+                            <h2 className='text-[22px] font-medium'>What this place offers?</h2>
+                            <div className='amenties grid grid-cols-1 max-w-[700px]'>
+                                {listing.amenties[0].split(",").map((item,index)=>(
+                                    <div className='facility' key={index}>
+                                        <div className='facility-icon'>
+                                            {
+                                                facilities.find((facility)=>facility.name===item)?.icon
+                                            }
+                                        </div>
+                                        <p>{item}</p>
+                                    </div>
+                                ))}
+
+                            </div>
+                            </div>
+
+                    </div>
                     {/* <p>{listing.description}</p>
                     <p><strong>Category:</strong> {listing.category}</p>
                     <p><strong>Type:</strong> {listing.type}</p>
