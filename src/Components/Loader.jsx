@@ -10,7 +10,7 @@ const Loader = () => {
       alignItems="center"
       minHeight="100vh"
     >
-      <CircularProgress />
+      <CircularProgress /
     </Box>
   );
 };

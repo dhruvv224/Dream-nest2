@@ -6,7 +6,7 @@ import { facilities } from '../Data';
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
-
+import Loader from './Loader';
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -118,7 +118,7 @@ const ListingsCard = () => {
                         
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <Loader/>
                 )}
             </div>
         </div>
