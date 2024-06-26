@@ -28,7 +28,18 @@ const ListingsCard = () => {
     useEffect(() => {
         console.log("Updated listing state:", listing);
     }, [listing]);
+// date booking calendar 
+const[dateRange,setDateRange]=useState([
+    {
+        startDate:new Date(),
+        endDate:new Date(),
+        key:"selction"
+    }
+])
+const handleSelect=(ranges)=>{
+    setDateRange([ranges.selection])
 
+}
     return (
       <div className=''>
 
@@ -89,6 +100,7 @@ const ListingsCard = () => {
                                 <div>
                                     <h2 className='text-[22px] font-medium'>How long do you want to stay?</h2>
                                     <div className='date-range-caledar'>
+                                        <DateRange ranges={dateRange} onChange={handleSelect}/>
                                     </div>
                                     </div>
                     </div>
