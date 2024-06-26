@@ -40,6 +40,9 @@ const handleSelect=(ranges)=>{
     setDateRange([ranges.selection])
 
 }
+const start=new Date(dateRange[0].startDate);
+const end=new Date(dateRange[0].endDate)
+const dayCount=Math.round(end-start)/(1000 * 60 * 60 *24 )
     return (
       <div className=''>
 
@@ -99,8 +102,27 @@ const handleSelect=(ranges)=>{
                             </div>
                                 <div>
                                     <h2 className='text-[22px] font-medium'>How long do you want to stay?</h2>
-                                    <div className='date-range-caledar'>
+                                    <div className='date-range-caledar m-4'>
                                         <DateRange ranges={dateRange} onChange={handleSelect}/>
+                                        {
+                                            dayCount>1 ?(
+                                                <h2 className='text-[20px] font-normal mb-3'>
+                                                    ₹{listing.price} X {dayCount} nights
+
+                                                </h2>
+                                            ):(
+                                                <h2 className='text-[20px] font-normal mb-3'>
+                                                                                                        ₹{listing.price} X {dayCount} night
+
+                                                </h2>
+                                            )
+                                        }
+                                        <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
+                                        <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
+                                        <p className='text-[18px] font-normal'>{dateRange[0].endDate.toDateString()}</p>
+                                        <button className='button' type='submit' onClick=''>
+                                            Book Now
+                                        </button>
                                     </div>
                                     </div>
                     </div>
