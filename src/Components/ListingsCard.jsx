@@ -26,10 +26,14 @@ const ListingsCard = () => {
     }, [listing]);
 
     return (
-        <div>
+        <div className='listing-details md:pt-[40px] md:pr-[130px] md:pb-[120px] pt-[40px] pr-[20px] pb-[120px]'>
             {listing ? (
+              
                 <div>
-                    <h1>{listing.title}</h1>
+                  <div className='title flex justify-between items-center sm:flex-col sm:items-start sm:gap-[15px]'>
+                  <h1 className='sm:text-[26px] text-[26px]'>{listing.title}</h1>
+                  </div>
+                  
                     <p>{listing.description}</p>
                     <p><strong>Category:</strong> {listing.category}</p>
                     <p><strong>Type:</strong> {listing.type}</p>
