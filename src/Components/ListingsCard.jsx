@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './Navbar';
 import { facilities } from '../Data';
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -69,9 +72,9 @@ const ListingsCard = () => {
                     <div className='booking flex justify-between'>
                         <div>
                             <h2 className='text-[22px] font-medium'>What this place offers?</h2>
-                            <div className='amenties grid grid-cols-1 max-w-[700px]'>
+                            <div className='amenties grid grid-cols-2 max-w-[700px]'>
                                 {listing.amenities[0].split(",").map((item,index)=>(
-                                    <div className='facility flex items-center gap-5 text-[18px] font-semibold mb-[20px]' key={index}>
+                                    <div className='facility flex items-center gap-5 text-[18px] font-semibold mb-[20px] m-4' key={index}>
                                         <div className='facility-icon text-[30px]'>
                                             {
                                                 facilities.find((facility)=>facility.name===item)?.icon
@@ -83,7 +86,11 @@ const ListingsCard = () => {
 
                             </div>
                             </div>
-
+                                <div>
+                                    <h2 className='text-[22px] font-medium'>How long do you want to stay?</h2>
+                                    <div className='date-range-caledar'>
+                                    </div>
+                                    </div>
                     </div>
                     {/* <p>{listing.description}</p>
                     <p><strong>Category:</strong> {listing.category}</p>
