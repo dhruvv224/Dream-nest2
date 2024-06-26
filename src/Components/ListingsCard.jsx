@@ -4,14 +4,13 @@ import axios from 'axios';
 
 const ListingsCard = () => {
     const { id } = useParams();
-    const [listing, setListing] = useState([]);
+    const [listing, setListing] = useState(null);
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
             const data = response.data.listing;
-            console.log("data is", data);
-            console.log(response);
+            console.log("Fetched data:", data);
             setListing(data);
         } catch (error) {
             console.error("Error fetching data", error);
@@ -22,22 +21,36 @@ const ListingsCard = () => {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        console.log("Updated listing state:", listing);
+    }, [listing]);
+
     return (
         <div>
-            <div>
-                {listing && listing.length > 0 ? (
-                    listing.map((item, index) => (
-                        <div className='' key={index}>
-                            <div className='description'>
-                                {item.description}
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No listings available.</p>
-                )}
-                hello
-            </div>
+            {listing ? (
+                <div>
+                    <h1>{listing.title}</h1>
+                    <p>{listing.description}</p>
+                    <p><strong>Category:</strong> {listing.category}</p>
+                    <p><strong>Type:</strong> {listing.type}</p>
+                    <p><strong>Address:</strong> {listing.streetAddress}, {listing.city}, {listing.province}, {listing.country}</p>
+                    <p><strong>Creator:</strong> {listing.creator}</p>
+                    <p><strong>Guests:</strong> {listing.guestCount}</p>
+                    <p><strong>Bedrooms:</strong> {listing.bedroomCount}</p>
+                    <p><strong>Beds:</strong> {listing.bedCount}</p>
+                    <p><strong>Bathrooms:</strong> {listing.bathroomCount}</p>
+                    <p><strong>Price:</strong> ${listing.price}</p>
+                    <p><strong>Amenities:</strong> {listing.amenities.join(', ')}</p>
+                    <div>
+                        <strong>Photos:</strong>
+                        {listing.listingPhotoPaths.map((path, index) => (
+                            <img key={index} src={path} alt={`Listing Photo ${index + 1}`} />
+                        ))}
+                    </div>
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     );
 }
