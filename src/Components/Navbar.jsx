@@ -86,6 +86,9 @@ const Navbar = () => {
                             <Link to="/register" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
                                 Sign Up
                             </Link>
+                            <Link to="/wishlist" className='text-[18px] rounded-2xl font-semibold w-full hover:bg-slate-100 hover:text-blue-500'>
+                                Wish List
+                            </Link>
                                     </>
                                 ) :(
                                     <>
