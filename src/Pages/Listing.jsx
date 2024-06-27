@@ -1,181 +1,152 @@
-import React, { useState, useEffect } from 'react';
-import { categories } from '../Data';
-import Loader from '../Components/Loader';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './Navbar';
+import { facilities } from '../Data';
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
-import { setListings } from '../Store/Slice';
-import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
-import { setWishList } from '../Store/Slice';
-import { Link } from 'react-router-dom';
-const Listing = () => {
-    const [selectedCategory, setSelectedCategory] = useState('All');
-    const [isLoading, setIsLoading] = useState(false);
-    const [categoryNotFound, setCategoryNotFound] = useState(false);
+import Loader from './Loader';
 
-    const dispatch = useDispatch();
+const ListingsCard = () => {
+    const { id } = useParams();
+    const [listing, setListing] = useState(null);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
-    }, []);
-
-    const handleCategory = (category) => {
-        setSelectedCategory(category);
-    };
-
-    const getFeedListings = async () => {
+    const fetchData = async () => {
         try {
-            const response = await axios.get(selectedCategory === 'All'
-                ? 'http://localhost:8000/api/listings'
-                : `http://localhost:8000/api/listings/category/${selectedCategory}`);
-            const data = response.data;
-            const data2 = data.listings.map(listing => ({ ...listing, currentIndex: 0, liked: false })); // Initialize currentIndex and liked for each listing
-            console.log("Fetched Listings:", data2);
-            dispatch(setListings({ listings: data2 }));
-
-            setCategoryNotFound(data2.length === 0);
+            const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
+            const data = response.data.listing;
+            console.log("Fetched data:", data);
+            setListing(data);
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching data", error);
         }
     };
 
-    const listings = useSelector((state) => state.user.listings);
-    console.log("Listings from Redux store:", listings);
+    useEffect(() => {
+        fetchData();
+    }, [id]);
 
     useEffect(() => {
-        getFeedListings();
-    }, [selectedCategory]);
+        console.log("Updated listing state:", listing);
+    }, [listing]);
 
-    const categoryContainerStyle = {
-        padding: '50px 60px',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '55px',
+    // Date booking calendar
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: "selection"
+        }
+    ]);
+
+    const handleSelect = (ranges) => {
+        setDateRange([ranges.selection]);
     };
 
-    const categoryItemStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        cursor: 'pointer',
-    };
-const [liked,setliked]=useState(false)
-const Wishlist=useSelector((state)=>state.Wishlist)
-    const toggleWishlist = (index) => {
-        const updatedListings = [...listings]; // Create a shallow copy of the listings array
-        updatedListings[index] = { ...updatedListings[index], liked: !updatedListings[index].liked }; // Update the liked property
-        setliked(!liked);
-        dispatch(setListings({listings:updatedListings}))
-        const likedItems=updatedListings.filter(item=>item.liked)
-        console.log("liked items >>>>>>",likedItems)
-        dispatch(setWishList({Wishlist:likedItems}))
-        // Logging the selected item when liked state is toggled
-        console.log("Selected item:", updatedListings[index]);
+    const start = new Date(dateRange[0].startDate);
+    const end = new Date(dateRange[0].endDate);
+    const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
+    const user = useSelector((state) => state.user);
+    const customerId = useSelector((state) => state?.user?._id);
+    const listingId = id;
+    const hostId = listing?.creator; // Ensure listing is defined before accessing creator
+
+    const handleSubmit = async () => {
+        try {
+            const bookingForm = {
+                customerId,
+                listingId,
+                hostId,
+                startDate: dateRange[0].startDate.toDateString(),
+                endDate: dateRange[0].endDate.toDateString(),
+                totalPrice: listing.price * dayCount
+            };
+            const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
+            if (response.status === 200) {
+                console.log("Booking successful");
+            }
+        } catch (error) {
+            console.log("Booking error:", error.message);
+        }
     };
 
-    const updateListingIndex = (index, newIndex) => {
-        const updatedListings = listings.map((listing, i) =>
-            i === index ? { ...listing, currentIndex: newIndex } : listing
-        );
-        dispatch(setListings({ listings: updatedListings }));
-    };
-
-    const goToPrevSlide = (index) => {
-        const newIndex = (listings[index].currentIndex - 1 + listings[index].listingPhotoPaths.length) % listings[index].listingPhotoPaths.length;
-        updateListingIndex(index, newIndex);
-    };
-
-    const goToNextSlide = (index) => {
-        const newIndex = (listings[index].currentIndex + 1) % listings[index].listingPhotoPaths.length;
-        updateListingIndex(index, newIndex);
-    };
-const patchWishList=async()=>{
-
-}
     return (
-        <div className="flex justify-center items-center min-h-screen w-full">
-            <div className="max-w-[1200px] w-full mx-auto">
-                <div style={categoryContainerStyle}>
-                    {categories.map((item, index) => (
-                        <div
-                            className={`category1 ${selectedCategory === item.label ? 'text-red-600' : 'text-black'} hover:text-red-600 duration-200 text-black text-[30px] md:text-[30px]`}
-                            style={categoryItemStyle}
-                            key={index}
-                            onClick={() => handleCategory(item.label)}
-                        >
-                            <div className='category_icons'>
-                                {item.icon}
-                            </div>
-                            <p className='category_label font-bold text-[20px]'>
-                                {item.label}
-                            </p>
+        <div className=''>
+            <Navbar />
+            <div className='listing-details p-12 mt-[20px] pt-[40px] mx-auto'>
+                {listing ? (
+                    <div>
+                        <div className='title flex justify-between items-center sm:flex-col sm:items-start sm:gap-[15px]'>
+                            <h1 className='text-[36px] font-semibold'>{listing.title}</h1>
                         </div>
-                    ))}
-                    <div className='grid grid-cols-2 md:grid-cols-4 gap-4 '>
-                        {isLoading ? <Loader /> :
-                            listings.map((item, index) => (
-                                <div className='relative cursor-pointer p-[10px] hover:border border-solid border-gray-200 rounded-2xl duration-150' key={index}>
-                                   
-                                    <div className='slide-container mb-[10px] mt-[10px] overflow-hidden'>
-                                        <div className='slider flex transition-transform duration-500 ease-in-out ' style={{ transform: `translateX(-${item.currentIndex * 300}px)` }}>
-                                            {
-                                                item.listingPhotoPaths.map((photoPath, photoIndex) => (
-                                                    <div className=' w-[300px] h-[270px] flex-shrink-0' key={photoIndex}>
-                                                                                          
-
-                                                        <img src={`http://localhost:8000/${photoPath}`} className='w-full h-full object-cover' alt={`${item.creator}`} />
-                                                        {
-                                                            !item.liked ? (
-                                                                <Favorite className={`absolute top-3 right-3 text-white hover:text-gray-100 duration-100 ${item.liked ? 'text-red-600' : 'text-white'}`} onClick={() => toggleWishlist(index)} />
-
-                                                            ):(
-                                                                <Favorite className={`absolute top-3 right-3 text-red-500 hover:text-red-600 duration-100`} onClick={() => toggleWishlist(index)} />
-
-                                                            )
-                                                        }
-                                                           
-                                                    </div>
-                                                ))
-                                            }
-                                        </div>
-
-                                        <button onClick={() => goToPrevSlide(index)} className="flex items-center justify-center cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 border-none  text-white p-2">
-                                            <ArrowBackIosNew />
-                                        </button>
-                                        <button onClick={() => goToNextSlide(index)} className="flex items-center justify-center cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 border-none  text-white p-2">
-                                            <ArrowForwardIos />
-                                        </button>
-                                        <div className='flex flex-col '>
-                                        <Link to={`/listings/${item._id}`}>
-                                            <h1 className='text-[16px] font-semibold'>
-                                                {item.title}
-                                            </h1>
-                                            <h4 className='text-[15px]'>{item.category}</h4>
-                                            <h3 className='text-[15px]'>{item.type}</h3>
-                                            <div className='flex items-center'>
-                                                <h5 className='text-[15px] font-medium'>₹{item.price}</h5>
-                                                {item.category === "Iconic cities" ? (
-                                                    <span className='inline ml-1'>Per Month</span>
-                                                ) : (
-                                                    <span className='inline ml-1'>Per Night</span>
-                                                )}
+                        <div className="photos flex flex-wrap gap-3 mt-[12px]">
+                            {listing.listingPhotoPaths.map((item, index) => (
+                                <img key={index} src={`http://localhost:8000/${item}`} className='max-w-[290px]' alt={`Listing Photo ${index + 1}`} />
+                            ))}
+                        </div>
+                        <h2 className='text-[20px] font-semibold mt-4'>
+                            {listing.type} in {listing.city}, {listing.province}, {listing.country}
+                        </h2>
+                        <p className='text-[18px] font-normal mt-4'>
+                            {listing.guestCount} guests - {listing.bedroomCount} bedroom(s) -{" "}
+                            {listing.bedCount} bed(s) - {listing.bathroomCount} bathroom(s)
+                        </p>
+                        <hr className='mt-4 mb-4' />
+                        <div className='profile'>
+                            <h3 className='text-[18px] font-medium'>Hosted by {listing.creator}</h3>
+                        </div>
+                        <hr className='mt-4 mb-4' />
+                        <h3 className='text-[18px] font-medium'>Description</h3>
+                        <p className='mt-4 max-w-[800px]'>{listing.description}</p>
+                        <hr className='mt-4 mb-4' />
+                        <h3 className='text-[18px] font-normal'>{listing.highlight}</h3>
+                        <p className='mt-4 max-w-[800px]'>{listing.highlightDesc}</p>
+                        <hr className='mt-4 mb-4' />
+                        <div className='booking flex justify-between'>
+                            <div>
+                                <h2 className='text-[22px] font-medium'>What this place offers?</h2>
+                                <div className='amenities grid grid-cols-2 max-w-[700px]'>
+                                    {listing.amenities[0].split(",").map((item, index) => (
+                                        <div className='facility flex items-center gap-5 text-[18px] font-semibold mb-[20px] m-4' key={index}>
+                                            <div className='facility-icon text-[30px]'>
+                                                {facilities.find((facility) => facility.name === item)?.icon}
                                             </div>
-                                            </Link>
+                                            <p>{item}</p>
                                         </div>
-                                     
-                                    </div>
-                                 
+                                    ))}
                                 </div>
-                            ))
-                        }
+                            </div>
+                            <div>
+                                <h2 className='text-[22px] font-medium'>How long do you want to stay?</h2>
+                                <div className='date-range-calendar m-4'>
+                                    <DateRange ranges={dateRange} onChange={handleSelect} />
+                                    {dayCount > 1 ? (
+                                        <h2 className='text-[20px] font-normal mb-3'>
+                                            ₹{listing.price} X {dayCount} nights
+                                        </h2>
+                                    ) : (
+                                        <h2 className='text-[20px] font-normal mb-3'>
+                                            ₹{listing.price} X {dayCount} night
+                                        </h2>
+                                    )}
+                                    <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
+                                    <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
+                                    <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
+                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {categoryNotFound && <div>No Results found for selected category.</div>}
-                </div>
+                ) : (
+                    <Loader />
+                )}
             </div>
         </div>
     );
 };
 
-export default Listing;
+export default ListingsCard;

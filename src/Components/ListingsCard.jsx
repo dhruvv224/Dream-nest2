@@ -6,6 +6,8 @@ import { facilities } from '../Data';
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
+import { useDispatch, useSelector } from 'react-redux';
+
 import Loader from './Loader';
 const ListingsCard = () => {
     const { id } = useParams();
@@ -46,7 +48,34 @@ const ListingsCard = () => {
     const start = new Date(dateRange[0].startDate);
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
-
+    const user=useSelector((state)=>state.user)
+    const customerId = useSelector((state) => state?.user?._id)
+    const listingId = id
+    // const HostId=listing.creator
+console.log(customerId)
+console.log("listings are",listing.creator)
+//  handle submit logic by passsing data to the backend
+const handleSubmit=async()=>{
+    try {
+        const bookingForm={
+            customerId,
+            listingId,
+            // HostId:listing.creator,
+            startDate:dateRange[0].startDate.toDateString(),
+            endDate:dateRange[0].endDate.toDateString(),
+            totalPrice:listing.price * dayCount
+        }
+        const response=axios.post("http://localhost:8000/api/booking/create",bookingForm)
+        if(response.ok)
+            {
+                console.log("all good")
+            }
+        
+    } catch (error) {
+        console.log("there is error can book",error.message)
+        
+    }
+}
     return (
         <div className=''>
             <Navbar />
@@ -109,7 +138,7 @@ const ListingsCard = () => {
                                     <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
                                     <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
                                     <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
-                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={() => { }}>
+                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
                                     </button>
                                 </div>
