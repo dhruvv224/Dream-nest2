@@ -26,9 +26,9 @@ const toggleWishlist=(index)=>{
     <>
    
     <Navbar/>
-    <div className='p-5'>
+    <div className='p-8ds'>
        
-        <h1 className='title list'> Your Wish Lists are</h1>
+        <h1 className='title list font-bold text-[26px]'> Your Wish Lists are</h1>
         <div className='list grid grid-cols-2 md:grid-cols-4 gap-4'>
             {
                 Wishlist.map((item,index)=>(
