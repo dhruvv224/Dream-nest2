@@ -21,12 +21,26 @@ const toggleWishlist=(index)=>{
     console.log("liked items >>>>>>",likedItems)
     dispatch(setWishList({Wishlist:likedItems}))
 
+    
+}
+const updateListingIndex=(index,newIndex)=>{
+    const updatedListings=listings.map((listing,i)=>
+        i===index?{...listing,currentIndex:newIndex}:listing
+    );
+    dispatch(setListings({listings:updatedListings}))
+}
+const goToPrevSlide=(index)=>{
+    const newIndex=(listings[index].currentIndex-1+listings[index].listingPhotoPaths.length)% listings[index].listingPhotoPaths.length
+    updateListingIndex(index,newIndex)
+}
+const goToNextSlide=(index)=>{
+    const newIndex=(listings[index].currentIndex+1)%listings[index].listingPhotoPaths.length;
 }
   return (
     <>
    
     <Navbar/>
-    <div className='p-8ds'>
+    <div className='p-8'>
        
         <h1 className='title list font-bold text-[26px]'> Your Wish Lists are</h1>
         <div className='list grid grid-cols-2 md:grid-cols-4 gap-4'>
