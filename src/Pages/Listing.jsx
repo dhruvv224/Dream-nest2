@@ -63,7 +63,6 @@ const Listing = () => {
     };
 const [liked,setliked]=useState(false)
 const Wishlist=useSelector((state)=>state.Wishlist)
-console.log("wish list",Wishlist)
     const toggleWishlist = (index) => {
         const updatedListings = [...listings]; // Create a shallow copy of the listings array
         updatedListings[index] = { ...updatedListings[index], liked: !updatedListings[index].liked }; // Update the liked property

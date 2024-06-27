@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import Footer from './Components/Footer';
 import Createlistings from './Pages/Createlistings';
 import ListingsCard from './Components/ListingsCard';
+import WishList from './Pages/WishList';
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/Login' element={<Login/>}/>
           <Route path='/create-listings' element={<Createlistings/>}/>
           <Route path='/listings/:id' element={<ListingsCard/>}/>
+          <Route path='/wishlist' element={<WishList/>}/>
 
 
 
