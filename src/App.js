@@ -10,6 +10,7 @@ import Createlistings from './Pages/Createlistings';
 import ListingsCard from './Components/ListingsCard';
 import WishList from './Pages/WishList';
 import { ChakraProvider } from '@chakra-ui/react';
+import TestToast from './Components/Testtoast';
 function App() {
 
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route path='/create-listings' element={<Createlistings/>}/>
           <Route path='/listings/:id' element={<ListingsCard/>}/>
           <Route path='/wishlist' element={<WishList/>}/>
+          <Route path='/testtoast' element={<TestToast/>}/>
+
 
 
 
