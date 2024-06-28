@@ -9,20 +9,25 @@ import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
 import { setTripList } from '../Store/Slice';
+import { useToast } from '@chakra-ui/react'
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
     const dispatch=useDispatch();
-
+    const tripList =useSelector((state)=>state.user.TripList);
+    console.log("triplist is",tripList)
 
     const fetchData = async () => {
+
+        
         try {
             const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
             const data = response.data.listing;
             console.log("Fetched data:", data);
             setListing(data);
             dispatch(setTripList(data));
-        
+           
+            
         } catch (error) {
             console.error("Error fetching data", error);
         }
