@@ -8,10 +8,12 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
-
+import { setTripList } from '../Store/Slice';
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
+    const dispatch=useDispatch();
+
 
     const fetchData = async () => {
         try {
@@ -19,6 +21,8 @@ const ListingsCard = () => {
             const data = response.data.listing;
             console.log("Fetched data:", data);
             setListing(data);
+            dispatch(setTripList(data));
+        
         } catch (error) {
             console.error("Error fetching data", error);
         }

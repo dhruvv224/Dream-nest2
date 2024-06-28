@@ -6,7 +6,8 @@ const initialState = {
     user: null,
     token: null,
     listings: [], // Ensure listings is an array
-    Wishlist:[]
+    Wishlist:[],
+    TripList:[]
 };
 
 // Create the slice
@@ -29,12 +30,15 @@ const userSlice = createSlice({
         },
         setWishList:(state,action)=>{
             state.Wishlist=action.payload.Wishlist;
+        },
+        setTripList:(state,action)=>{
+            state.TripList=action.payload.TripList;
         }
     },
 });
 
 // Export the actions
-export const { setUser, setListings, setLogout,setWishList } = userSlice.actions;
+export const { setUser, setListings, setLogout,setWishList,setTripList } = userSlice.actions;
 
 // Export the reducer
 export default userSlice.reducer;
