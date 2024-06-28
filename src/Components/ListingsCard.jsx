@@ -9,30 +9,34 @@ import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
 import { setTripList } from '../Store/Slice';
-import { useToast,Button } from '@chakra-ui/react';
-
+import { useToast } from '@chakra-ui/react'
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
-    const dispatch = useDispatch();
-    const tripList = useSelector((state) => state.user.TripList);
-    const toast = useToast();
+    const dispatch=useDispatch();
+    const tripList =useSelector((state)=>state.user.TripList);
+    console.log("triplist is",tripList)
+    const toast=useToast()
 
     const fetchData = async () => {
+
+        
         try {
             const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
             const data = response.data.listing;
+            console.log("Fetched data:", data);
             setListing(data);
             dispatch(setTripList(data));
+           toast({
+            title:'Booking Successful',
+            description: "We will send an email for further deta",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+           })
+            
         } catch (error) {
             console.error("Error fetching data", error);
-            toast({
-                title: 'Error',
-                description: "Failed to fetch listing details",
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-            });
         }
     };
 
@@ -44,6 +48,7 @@ const ListingsCard = () => {
         console.log("Updated listing state:", listing);
     }, [listing]);
 
+    // Date booking calendar
     const [dateRange, setDateRange] = useState([
         {
             startDate: new Date(),
@@ -60,10 +65,11 @@ const ListingsCard = () => {
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
     const user = useSelector((state) => state.user.user);
-    const customerId = user?._id;
+    const customerId = useSelector((state) => state?.user.user._id);
+    console.log("customer id is ",customerId)
     const listingId = id;
-    const hostId = listing?.creator;
-
+    const hostId = listing?.creator; // Ensure listing is defined before accessing creator
+console.log("host id",hostId)
     const handleSubmit = async () => {
         try {
             const bookingForm = {
@@ -77,30 +83,14 @@ const ListingsCard = () => {
             const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
             if (response.status === 200) {
                 console.log("Booking successful");
-                toast({
-                    title: 'Booking Successful',
-                    description: "We will send an email for further details",
-                    status: 'success',
-                    duration: 9000,
-                    isClosable: true,
-                    position: 'bottom'
-                });
             }
         } catch (error) {
-            console.error("Booking error:", error.message);
-            toast({
-                title: 'Error',
-                description: "Failed to complete booking",
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-                position: 'bottom'
-            });
+            console.log("Booking error:", error.message);
         }
     };
 
     return (
-        <div>
+        <div className=''>
             <Navbar />
             <div className='listing-details p-12 mt-[20px] pt-[40px] mx-auto'>
                 {listing ? (
@@ -161,10 +151,9 @@ const ListingsCard = () => {
                                     <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
                                     <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
                                     <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
-                                    <Button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
+                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
-                                    </Button>
-                        
+                                    </button>
                                 </div>
                             </div>
                         </div>
