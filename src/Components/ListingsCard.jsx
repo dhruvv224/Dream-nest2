@@ -9,7 +9,7 @@ import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
 import { setTripList } from '../Store/Slice';
-import { useToast } from '@chakra-ui/react';
+import { useToast,Button } from '@chakra-ui/react';
 
 const ListingsCard = () => {
     const { id } = useParams();
@@ -161,10 +161,10 @@ const ListingsCard = () => {
                                     <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
                                     <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
                                     <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
-                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
+                                    <Button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
       onClick={() =>
         toast({
           title: 'Account created.',
@@ -178,7 +178,7 @@ const ListingsCard = () => {
       type='button'
     >
       Show Toast
-    </button>
+    </Button>
                                 </div>
                             </div>
                         </div>

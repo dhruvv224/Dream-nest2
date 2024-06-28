@@ -7,13 +7,15 @@ import { setListings } from '../Store/Slice';
 import { ArrowForwardIos, ArrowBackIosNew, Favorite } from "@mui/icons-material";
 import { setWishList } from '../Store/Slice';
 import { Link } from 'react-router-dom';
+import { useToast ,Button} from '@chakra-ui/react';
+
 const Listing = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isLoading, setIsLoading] = useState(false);
     const [categoryNotFound, setCategoryNotFound] = useState(false);
 
     const dispatch = useDispatch();
-
+const toast=useToast()
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
@@ -166,7 +168,21 @@ const patchWishList=async()=>{
                                         </div>
                                      
                                     </div>
-                                 
+                                    <Button
+      onClick={() =>
+        toast({
+          title: 'Account created.',
+          description: "We've created your account for you.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
+      className='button mt-2 p-2 bg-blue-400 rounded-md text-white'
+      type='button'
+    >
+      Show Toast
+    </Button>
                                 </div>
                             ))
                         }
