@@ -164,21 +164,7 @@ const ListingsCard = () => {
                                     <Button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
                                     </Button>
-                                    <Button
-      onClick={() =>
-        toast({
-          title: 'Account created.',
-          description: "We've created your account for you.",
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        })
-      }
-      className='button mt-2 p-2 bg-blue-400 rounded-md text-white'
-      type='button'
-    >
-      Show Toast
-    </Button>
+                        
                                 </div>
                             </div>
                         </div>
