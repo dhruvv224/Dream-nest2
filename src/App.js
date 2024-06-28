@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 import Createlistings from './Pages/Createlistings';
 import ListingsCard from './Components/ListingsCard';
 import WishList from './Pages/WishList';
+import { ChakraProvider } from '@chakra-ui/react';
 function App() {
 
   return (
