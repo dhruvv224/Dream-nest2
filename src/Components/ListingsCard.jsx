@@ -9,7 +9,8 @@ import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
 import { setTripList } from '../Store/Slice';
-import { useToast } from '@chakra-ui/react'
+import { Button, useToast, ChakraProvider } from '@chakra-ui/react';
+
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -27,13 +28,7 @@ const ListingsCard = () => {
             console.log("Fetched data:", data);
             setListing(data);
             dispatch(setTripList(data));
-           toast({
-            title:'Booking Successful',
-            description: "We will send an email for further deta",
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-           })
+           
             
         } catch (error) {
             console.error("Error fetching data", error);
@@ -71,6 +66,13 @@ const ListingsCard = () => {
     const hostId = listing?.creator; // Ensure listing is defined before accessing creator
 console.log("host id",hostId)
     const handleSubmit = async () => {
+        toast({
+            title:'Booking Successful',
+            description: "We will send an email for further details",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+           })
         try {
             const bookingForm = {
                 customerId,
@@ -151,9 +153,9 @@ console.log("host id",hostId)
                                     <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
                                     <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
                                     <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
-                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
+                                    <Button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -165,5 +167,4 @@ console.log("host id",hostId)
         </div>
     );
 };
-
 export default ListingsCard;
