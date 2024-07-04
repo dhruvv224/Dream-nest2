@@ -59,13 +59,14 @@ const ListingsCard = () => {
     const start = new Date(dateRange[0].startDate);
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
-    const user = useSelector((state) => state.user.user);
-    const customerId = useSelector((state) => state?.user.user._id);
-    console.log("customer id is ",customerId)
-    const listingId = id;
-    const hostId = listing?.creator; // Ensure listing is defined before accessing creator
-console.log("host id",hostId)
+   // Ensure listing is defined before accessing creator
+// console.log("host id",hostId)
     const handleSubmit = async () => {
+        const user = useSelector((state) => state.user.user);
+        const customerId = useSelector((state) => state?.user.user._id);
+        console.log("customer id is ",customerId)
+        const listingId = id;
+        const hostId = listing?.creator; 
         toast({
             title:'Booking Successful',
             description: "We will send an email for further details",
@@ -74,6 +75,7 @@ console.log("host id",hostId)
           isClosable: true,
            })
         try {
+
             const bookingForm = {
                 customerId,
                 listingId,
