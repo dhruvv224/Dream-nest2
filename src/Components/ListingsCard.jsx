@@ -14,22 +14,18 @@ import { Button, useToast, ChakraProvider } from '@chakra-ui/react';
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
-    const dispatch=useDispatch();
-    const tripList =useSelector((state)=>state.user.TripList);
-    console.log("triplist is",tripList)
-    const toast=useToast()
+    const dispatch = useDispatch();
+    const tripList = useSelector((state) => state.user.TripList);
+    console.log("triplist is", tripList)
+    const toast = useToast();
 
     const fetchData = async () => {
-
-        
         try {
             const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
             const data = response.data.listing;
             console.log("Fetched data:", data);
             setListing(data);
             dispatch(setTripList(data));
-           
-            
         } catch (error) {
             console.error("Error fetching data", error);
         }
@@ -59,23 +55,34 @@ const ListingsCard = () => {
     const start = new Date(dateRange[0].startDate);
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
-   // Ensure listing is defined before accessing creator
-// console.log("host id",hostId)
-    const handleSubmit = async () => {
-        const user = useSelector((state) => state.user.user);
-        const customerId = useSelector((state) => state?.user.user._id);
-        console.log("customer id is ",customerId)
-        const listingId = id;
-        const hostId = listing?.creator; 
-        toast({
-            title:'Booking Successful',
-            description: "We will send an email for further details",
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-           })
-        try {
+    const user = useSelector((state) => state.user.user);
+    const customerId = user ? user._id : null;
 
+    const handleSubmit = async () => {
+        if (!customerId) {
+            toast({
+                title: 'Login required',
+                description: "Please log in to book a listing.",
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            });
+            return;
+        }
+
+        console.log("customer id is ", customerId);
+        const listingId = id;
+        const hostId = listing?.creator;
+        
+        toast({
+            title: 'Booking Successful',
+            description: "We will send an email for further details",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+        });
+        
+        try {
             const bookingForm = {
                 customerId,
                 listingId,
@@ -169,4 +176,5 @@ const ListingsCard = () => {
         </div>
     );
 };
+
 export default ListingsCard;
