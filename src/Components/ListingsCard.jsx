@@ -55,31 +55,31 @@ const ListingsCard = () => {
     const start = new Date(dateRange[0].startDate);
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
-    const user = useSelector((state) => state.user.user);
-    let customerId;
-    if(!user)
-        {
-            console.log("user does not exists")
+    // const user = useSelector((state) => state.user.user);
+    // let customerId;
+    // if(!user)
+    //     {
+    //         console.log("user does not exists")
 
-        }
-    else
-    {
-        customerId=user._id
-        console.log(customerId)
+    //     }
+    // else
+    // {
+    //     customerId=user._id
+    //     console.log(customerId)
         
-    }
+    // }
 
     const handleSubmit = async () => {
-        if (!customerId) {
-            toast({
-                title: 'Login required',
-                description: "Please log in to book a listing.",
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-            });
-            return;
-        }
+        // if (!customerId) {
+        //     toast({
+        //         title: 'Login required',
+        //         description: "Please log in to book a listing.",
+        //         status: 'error',
+        //         duration: 9000,
+        //         isClosable: true,
+        //     });
+        //     return;
+        // }
 
         const listingId = id;
         const hostId = listing?.creator;
@@ -94,7 +94,7 @@ const ListingsCard = () => {
 
         try {
             const bookingForm = {
-                customerId,
+                // customerId,
                 listingId,
                 hostId,
                 startDate: dateRange[0].startDate.toDateString(),
