@@ -16,7 +16,7 @@ const ListingsCard = () => {
     const [listing, setListing] = useState(null);
     const dispatch = useDispatch();
     const tripList = useSelector((state) => state.user.TripList);
-    console.log("triplist is", tripList)
+    console.log("triplist is", tripList);
     const toast = useToast();
 
     const fetchData = async () => {
@@ -70,10 +70,9 @@ const ListingsCard = () => {
             return;
         }
 
-        console.log("customer id is ", customerId);
         const listingId = id;
         const hostId = listing?.creator;
-        
+
         toast({
             title: 'Booking Successful',
             description: "We will send an email for further details",
@@ -81,7 +80,7 @@ const ListingsCard = () => {
             duration: 9000,
             isClosable: true,
         });
-        
+
         try {
             const bookingForm = {
                 customerId,
@@ -99,6 +98,8 @@ const ListingsCard = () => {
             console.log("Booking error:", error.message);
         }
     };
+
+    
 
     return (
         <div className=''>
