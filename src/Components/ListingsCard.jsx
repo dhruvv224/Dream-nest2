@@ -56,7 +56,18 @@ const ListingsCard = () => {
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
     const user = useSelector((state) => state.user.user);
-    const customerId = user ? user._id : null;
+    let customerId;
+    if(!user)
+        {
+            console.log("user does not exists")
+
+        }
+    else
+    {
+        customerId=user._id
+        console.log(customerId)
+        
+    }
 
     const handleSubmit = async () => {
         if (!customerId) {
