@@ -25,7 +25,8 @@ const toast=useToast()
     const handleCategory = (category) => {
         setSelectedCategory(category);
     };
-
+const user=useSelector((state)=>state.user.user)
+console.log("user:-",user)
     const getFeedListings = async () => {
         try {
             const response = await axios.get(selectedCategory === 'All'
