@@ -11,6 +11,7 @@ import ListingsCard from './Components/ListingsCard';
 import WishList from './Pages/WishList';
 import { ChakraProvider } from '@chakra-ui/react';
 import TestToast from './Components/Testtoast';
+import Listingcard2 from './Components/Listingcard2';
 function App() {
 
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path='/listings/:id' element={<ListingsCard/>}/>
           <Route path='/wishlist' element={<WishList/>}/>
           <Route path='/testtoast' element={<TestToast/>}/>
+          <Route path='/listings2/:id' element={<Listingcard2/>}/>
+
 
 
 
