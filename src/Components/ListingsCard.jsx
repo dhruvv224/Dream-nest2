@@ -8,18 +8,17 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
-// import { setTripList } from '../Store/Slice';
-// import {  useToast } from '@chakra-ui/react';
-// import { Button, useToast } from '@chakra-ui/react';
+import { setTripList } from '../Store/Slice';
+
 
 const ListingsCard = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
     const dispatch = useDispatch();
-    // // const tripList = useSelector((state) => state.user.TripList);
+    const tripList = useSelector((state) => state.user.TripList);
     // // console.log("triplist is", tripList);
     // const toast = useToast();
-
+const listingId=id
     const fetchData = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/api/listings/${id}`);
@@ -56,59 +55,48 @@ const ListingsCard = () => {
     const start = new Date(dateRange[0].startDate);
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
-    // const user = useSelector((state) => state.user.user);
-    // let customerId;
-    // if(!user)
-    //     {
-    //         console.log("user does not exists")
+    const user = useSelector((state) => state.user.user);
+    console.log(user)
+    let customerId=0;
+    if(!user)
+    {
+        console.log("user doesnot exists")
+    }
+    else
+    {
+      customerId=user._id;  
+    }
+    console.log(customerId)
 
-    //     }
-    // else
-    // {
-    //     customerId=user._id
-    //     console.log(customerId)
-        
-    // }
+const hostId=listing?.creator
+  
 
-    // const handleSubmit = async () => {
-    //     // if (!customerId) {
-    //     //     toast({
-    //     //         title: 'Login required',
-    //     //         description: "Please log in to book a listing.",
-    //     //         status: 'error',
-    //     //         duration: 9000,
-    //     //         isClosable: true,
-    //     //     });
-    //     //     return;
-    //     // }
+    const handleSubmit = async () => {
+        if(user)
+        {
+            try {
+                const bookingForm = {
+                    customerId,
+                    listingId,
+                    hostId,
+                    startDate: dateRange[0].startDate.toDateString(),
+                    endDate: dateRange[0].endDate.toDateString(),
+                    totalPrice: listing.price * dayCount
+                };
+                const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
+                if (response.status === 200) {
+                    console.log("Booking successful");
+                }
+            } catch (error) {
+                console.log("Booking error:", error.message);
+            }
+        }
+        else
+        {
+            alert("you havent login/signup")
+        }
 
-    //     // const listingId = id;
-    //     // const hostId = listing?.creator;
-    //     // toast({
-    //     //     title: 'Test Toast',
-    //     //     description: 'This is a test toast notification',
-    //     //     status: 'success',
-    //     //     duration: 5000,
-    //     //     isClosable: true,
-    //     // })
-
-    //     // try {
-    //     //     const bookingForm = {
-    //     //         // customerId,
-    //     //         listingId,
-    //     //         hostId,
-    //     //         startDate: dateRange[0].startDate.toDateString(),
-    //     //         endDate: dateRange[0].endDate.toDateString(),
-    //     //         totalPrice: listing.price * dayCount
-    //     //     };
-    //     //     const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
-    //     //     if (response.status === 200) {
-    //     //         console.log("Booking successful");
-    //     //     }
-    //     // } catch (error) {
-    //     //     console.log("Booking error:", error.message);
-    //     // }
-    // };
+    };
 
     
 
@@ -118,7 +106,7 @@ const ListingsCard = () => {
       
         <div className=''>
             <Navbar />
-            <div className='listing-details p-12 mt-[20px] pt-[40px] mx-auto'>
+            <div className='listing-details md:p-12 mt-[20px] pt-[40px] mx-auto'>
                 {listing ? (
                     <div>
                         <div className='title flex justify-between items-center sm:flex-col sm:items-start sm:gap-[15px]'>
@@ -147,10 +135,10 @@ const ListingsCard = () => {
                         <h3 className='text-[18px] font-normal'>{listing.highlight}</h3>
                         <p className='mt-4 max-w-[800px]'>{listing.highlightDesc}</p>
                         <hr className='mt-4 mb-4' />
-                        <div className='booking flex justify-between'>
+                        <div className='booking md:flex justify-between'>
                             <div>
                                 <h2 className='text-[22px] font-medium'>What this place offers?</h2>
-                                <div className='amenities grid grid-cols-2 max-w-[700px]'>
+                                <div className='amenities grid md:grid-cols-2 max-w-[700px]'>
                                     {listing.amenities[0].split(",").map((item, index) => (
                                         <div className='facility flex items-center gap-5 text-[18px] font-semibold mb-[20px] m-4' key={index}>
                                             <div className='facility-icon text-[30px]'>
@@ -177,7 +165,7 @@ const ListingsCard = () => {
                                     <h2 className='text-[20px] font-normal mb-3'>Total price: ₹{listing.price * dayCount}</h2>
                                     <p className='text-[18px] font-normal'>{dateRange[0].startDate.toDateString()}</p>
                                     <p className='text-[18px] font-normal mt-1'>{dateRange[0].endDate.toDateString()}</p>
-                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={''}>
+                                    <button className='button mt-2 p-2 bg-blue-500 text-white hover:bg-blue-600 duration-150 rounded-xl' type='submit' onClick={handleSubmit}>
                                         Book Now
                                     </button>
                                 </div>

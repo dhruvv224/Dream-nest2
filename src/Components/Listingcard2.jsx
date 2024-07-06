@@ -69,46 +69,31 @@ const ListingsCard = () => {
         
     // }
 
-    // const handleSubmit = async () => {
-    //     // if (!customerId) {
-    //     //     toast({
-    //     //         title: 'Login required',
-    //     //         description: "Please log in to book a listing.",
-    //     //         status: 'error',
-    //     //         duration: 9000,
-    //     //         isClosable: true,
-    //     //     });
-    //     //     return;
-    //     // }
+    const handleSubmit = async () => {
+        // if (!customerId) {
+        //     toast({
+        //         title: 'Login required',
+        //         description: "Please log in to book a listing.",
+        //         status: 'error',
+        //         duration: 9000,
+        //         isClosable: true,
+        //     });
+        //     return;
+        // }
 
-    //     // const listingId = id;
-    //     // const hostId = listing?.creator;
+        // const listingId = id;
+        // const hostId = listing?.creator;
 
-    //     toast({
-    //         title: 'Booking Successful',
-    //         description: "We will send an email for further details",
-    //         status: 'success',
-    //         duration: 9000,
-    //         isClosable: true,
-    //     });
+        toast({
+            title: 'Booking Successful',
+            description: "We will send an email for further details",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+        });
 
-    //     // try {
-    //     //     const bookingForm = {
-    //     //         // customerId,
-    //     //         listingId,
-    //     //         hostId,
-    //     //         startDate: dateRange[0].startDate.toDateString(),
-    //     //         endDate: dateRange[0].endDate.toDateString(),
-    //     //         totalPrice: listing.price * dayCount
-    //     //     };
-    //     //     const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
-    //     //     if (response.status === 200) {
-    //     //         console.log("Booking successful");
-    //     //     }
-    //     // } catch (error) {
-    //     //     console.log("Booking error:", error.message);
-    //     // }
-    // };
+
+    };
 
     
 
