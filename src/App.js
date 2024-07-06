@@ -16,6 +16,9 @@ function App() {
 
   return (
     <div className="App">
+      <ChakraProvider>
+
+ 
       <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/Register' element={<Register/>}/>
@@ -31,6 +34,7 @@ function App() {
 
 
       </Routes>
+      </ChakraProvider>
      <Footer/>
     </div>
   );

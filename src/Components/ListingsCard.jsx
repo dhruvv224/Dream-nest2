@@ -8,8 +8,9 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './Loader';
-import { setTripList } from '../Store/Slice';
-// import { Button, useToast, ChakraProvider } from '@chakra-ui/react';
+// import { setTripList } from '../Store/Slice';
+// import {  useToast } from '@chakra-ui/react';
+// import { Button, useToast } from '@chakra-ui/react';
 
 const ListingsCard = () => {
     const { id } = useParams();
@@ -25,7 +26,7 @@ const ListingsCard = () => {
             const data = response.data.listing;
             console.log("Fetched data:", data);
             setListing(data);
-            dispatch(setTripList(data));
+            // dispatch(setTripList(data));
         } catch (error) {
             console.error("Error fetching data", error);
         }
@@ -83,14 +84,13 @@ const ListingsCard = () => {
 
     //     // const listingId = id;
     //     // const hostId = listing?.creator;
-
-    //     toast({
-    //         title: 'Booking Successful',
-    //         description: "We will send an email for further details",
-    //         status: 'success',
-    //         duration: 9000,
-    //         isClosable: true,
-    //     });
+    //     // toast({
+    //     //     title: 'Test Toast',
+    //     //     description: 'This is a test toast notification',
+    //     //     status: 'success',
+    //     //     duration: 5000,
+    //     //     isClosable: true,
+    //     // })
 
     //     // try {
     //     //     const bookingForm = {
@@ -113,6 +113,9 @@ const ListingsCard = () => {
     
 
     return (
+      
+
+      
         <div className=''>
             <Navbar />
             <div className='listing-details p-12 mt-[20px] pt-[40px] mx-auto'>
@@ -186,6 +189,7 @@ const ListingsCard = () => {
                 )}
             </div>
         </div>
+   
     );
 };
 
