@@ -69,6 +69,7 @@ const listingId=id
     console.log(customerId)
 
 const hostId=listing?.creator
+const customerEmail=user?.email
   
 
     const handleSubmit = async () => {
@@ -76,12 +77,14 @@ const hostId=listing?.creator
         {
             try {
                 const bookingForm = {
+                    
                     customerId,
                     listingId,
                     hostId,
                     startDate: dateRange[0].startDate.toDateString(),
                     endDate: dateRange[0].endDate.toDateString(),
-                    totalPrice: listing.price * dayCount
+                    totalPrice: listing.price * dayCount,
+                    customerEmail
                 };
                 const response = await axios.post("http://localhost:8000/api/booking/create", bookingForm);
                 if (response.status === 200) {
